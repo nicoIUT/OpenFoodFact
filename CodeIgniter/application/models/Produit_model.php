@@ -7,19 +7,13 @@ class  Data_model  extends  CI_Model {
 	}
 	
 	
-	public function data_get_Produit_info($nom_produit) 
+	public function getProductByID($id) 
+	//Retourne le produit dont l'id est passé en paramètre
+	//J'ai pas encore géré la differenciation entre les données importées et ajoutées
 	{
-		/* a faire !!!!!! 
-		$this->db->select('product_name,.....');
-		$this->db->from('_Produit');
-		$this->db->where(array('product_name' => $nom_marque )) ;
-		
-		$query = $this->db->get(); 
-		$rep =  $query ->result_array();
-		return  $rep ; 
-		* */
-	
+		return $this->db->query("SELECT * FROM openfoodfacts._produit WHERE id_produit = $id")->row_array();
 	}
+	
 	
 	public function data_get_Produit_nom($nom_produit) 
 	{

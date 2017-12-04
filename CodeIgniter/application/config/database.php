@@ -75,12 +75,12 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => '',
-	'password' => '',
-	'database' => '',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
+	'hostname' => 'servbdd',
+	'username' => 'cellieai',
+	'password' => 'hv4gp26!',
+	'database' => 'pg_cellieai',
+	'dbdriver' => 'postgre',
+	'dbprefix' => 'openfoodfacts.',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
