@@ -14,23 +14,12 @@ class Produit extends CI_Controller {
 	
 	{
 		$this->load->vars($_SESSION) ; 
-		$this->load->model('Produit_model')  ; 
+		$this->load->model('Produit_model')  ;
 		$this->load->view('affiche_produit');
 		$_SESSION['title'] = $produit ; 
 		
 		
 		$this ->load ->helper('url');
 	}
-	
-	public function display($id){
-		$data['title'] = 'Produit:'.$id;
-		$data['content'] = 'displayOneProduct';
-		$data['product'] = $this->Produit_model->getProductByID($id);
-		if(isset($data['post'])){
-            $this->load->vars($data);
-            $this->load->view('template');
-        }else{
-            show_404();
-        }
-	}
+
 }

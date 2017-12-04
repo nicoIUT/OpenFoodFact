@@ -73,6 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+/* DB IUT
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'servbdd',
@@ -93,4 +94,27 @@ $db['default'] = array(
 	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE
+*/
+$db['default'] = array(
+    'dsn'	=> '',
+    'hostname' => 'horton.elephantsql.com',
+    'port' => 5432,
+    'username' => 'onxtrzmi',
+    'password' => '702kMBr4QdMcN9GcT8Ld5MDKDfSF5ZLh',
+    'database' => 'onxtrzmi',
+    'dbdriver' => 'postgre',
+    'dbprefix' => 'openfoodfacts.',
+    'pconnect' => FALSE,
+    'db_debug' => (ENVIRONMENT !== 'production'),
+    'cache_on' => FALSE,
+    'cachedir' => '',
+    'char_set' => 'utf8',
+    'dbcollat' => 'utf8_general_ci',
+    'swap_pre' => '',
+    'encrypt' => FALSE,
+    'compress' => FALSE,
+    'stricton' => FALSE,
+    'failover' => array(),
+    'save_queries' => TRUE
+
 );
