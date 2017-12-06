@@ -21,19 +21,13 @@ class Produits extends CI_Controller {
     public function display($id){
         $data['title'] = 'Produit:'.$id;
         $data['content'] = 'displayOneProduct';
-        $data['product'] = $this->Produit->getProductByID($id);
-        $this->load->vars($data);
-        $this->load->view('template');
-
-
-        /*
-        if(isset($data['post'])){
+        $data['product'] = $this->Produit->getProductByID($id);;
+        if(isset($data['product'])){
             $this->load->vars($data);
             $this->load->view('template');
         }else{
             show_404();
         }
-        */
     }
 
 }

@@ -47,7 +47,12 @@ calcium_100g decimal,
 iron_100g decimal,
 nutrition_score_fr_100g int,
 CONSTRAINT _produit_pk PRIMARY KEY (id_produit),
-CONSTRAINT _produit_fk FOREIGN KEY (brands) REFERENCES openfoodfacts._marque(nom));
+CONSTRAINT _produit_fk1 FOREIGN KEY (brands) REFERENCES openfoodfacts._marque(nom),
+CONSTRAINT _produit_fk2 FOREIGN KEY (countries_fr) REFERENCES openfoodfacts._pays(nom));
+
+CREATE TABLE openfoodfacts._pays(
+nom VARCHAR(100),
+CONSTRAINT _pays_pk PRIMARY KEY (nom));
 
 CREATE TABLE openfoodfacts._reference(
 id_reference int,
@@ -73,7 +78,7 @@ CONSTRAINT _additifcontenus_fk2 FOREIGN KEY (id_additif) REFERENCES openfoodfact
 CREATE TABLE openfoodfacts._ingredientcontenusproduit(
 id_produit int,
 ingredients_text text,
-CONSTRAINT _ingredientcontenusproduit_pk PRIMARY KEY (id_produit),
+CONSTRAINT _ingredientcontenusproduit_pk PRIMARY KEY (id_produit, ingredients_text),
 CONSTRAINT _ingredientcontenus_fk1 FOREIGN KEY (id_produit) REFERENCES openfoodfacts._produit(id_produit),
 CONSTRAINT _ingredientcontenus_fk2 FOREIGN KEY (ingredients_text) REFERENCES openfoodfacts._ingredient(ingredients_text)
 );
