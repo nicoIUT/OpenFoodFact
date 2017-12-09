@@ -21,6 +21,10 @@ CREATE TABLE openfoodfacts._ingredient(
 ingredients_text text,
 CONSTRAINT _ingredient_pk PRIMARY KEY (ingredients_text));
 
+CREATE TABLE openfoodfacts._pays(
+nom VARCHAR(100),
+CONSTRAINT _pays_pk PRIMARY KEY (nom));
+
 CREATE TABLE openfoodfacts._produit(
 id_produit serial,
 created_t timestamp,
@@ -49,10 +53,6 @@ nutrition_score_fr_100g int,
 CONSTRAINT _produit_pk PRIMARY KEY (id_produit),
 CONSTRAINT _produit_fk1 FOREIGN KEY (brands) REFERENCES openfoodfacts._marque(nom),
 CONSTRAINT _produit_fk2 FOREIGN KEY (countries_fr) REFERENCES openfoodfacts._pays(nom));
-
-CREATE TABLE openfoodfacts._pays(
-nom VARCHAR(100),
-CONSTRAINT _pays_pk PRIMARY KEY (nom));
 
 CREATE TABLE openfoodfacts._reference(
 id_reference int,
@@ -90,3 +90,58 @@ CONSTRAINT _ingredientcontenusingredient_pk PRIMARY KEY (ingredients_contenu, in
 CONSTRAINT _ingredientcontenus_fk1 FOREIGN KEY (ingredients_contenu) REFERENCES openfoodfacts._ingredient(ingredients_text),
 CONSTRAINT _ingredientcontenus_fk2 FOREIGN KEY (ingredients_contenant) REFERENCES openfoodfacts._ingredient(ingredients_text)
 );
+
+
+/*
+INSERT INTO openfoodfacts._produit(
+created_t,
+last_modified_t,
+product_name,
+brands,
+countries_fr,
+serving_size,
+nutrition_grade_fr,
+energy_100g,
+fat_100g,
+satured_fat_100g,
+trans_fat_100g,
+cholesterol_100g,
+carbohydrates_100g,
+sugars_100g,
+fibers_100g,
+proteins_100g,
+salt_100g,
+sodium_100g,
+vitamin_a_100g,
+vitamin_c_100g,
+calcium_100g,
+iron_100g,
+nutrition_score_fr_100g)
+VALUES(
+now(),
+now(),
+'Spagheti',
+'Panzani',
+'france',
+'paquet',
+'f',
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16
+);
+
+http://localhost/OpenFoodFact/CodeIgniter/index.php/Produits/display/1
+*/
