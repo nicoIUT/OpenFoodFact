@@ -19,12 +19,16 @@ class Produits extends CI_Controller {
     }
 
     public function display($id){
-        $data['title'] = 'Produit:'.$id;
-        $data['content'] = 'displayOneProduct';
-        $data['product'] = $this->Produit->getProductByID($id);;
-        if(isset($data['product'])){
-            $this->load->vars($data);
-            $this->load->view('template');
+        if(preg_match("#^[0-9]+$#", $id)){
+            $data['title'] = 'Produit:'.$id;
+            $data['content'] = 'displayOneProduct';
+            $data['product'] = $this->Produit->getProductByID($id);
+            if(isset($data['product'])){
+                $this->load->vars($data);
+                $this->load->view('template');
+            }else{
+                show_404();
+            }
         }else{
             show_404();
         }

@@ -4,9 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <!DOCTYPE html>
 <html>
-    <title><?php echo $title; ?></title>
+    <head>
+        <title><?php echo $title; ?></title>
+    </head>
 
-    <main>
+    <body>
         <?php $this->load->view($content); ?>
-    </main>
+    </body>
 </html>

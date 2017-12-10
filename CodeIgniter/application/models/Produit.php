@@ -5,13 +5,28 @@ class  Produit  extends  CI_Model
     {
         $this->load->database();
         $this->load->library('session');
-    }
+	}
+
+	public function getIngredientList($id, &$ingredientCollector){
+		if(array_key_exists($id, $ingredientCollector)){
+			return;
+		}
+		$list_ing = $this->db->query("SELECT * FROM openfoodfacts._ingredientcontenusingredient WHERE ingredients_contenant = '$id'")->result_array();
+		if(!empty($list_ing)){
+			foreach($list_ing as $ing){
+				$this->getIngredientList($ing['ingredients_contenu'], $ingredientCollector);
+				$ingredientCollector[$id][] = $ing['ingredients_contenu'];
+			}
+		}
+	}
+
 
 
     public function getProductByID($id)
         //Retourne le produit dont l'id est passé en paramètre
 
     {
+
 		$result = array();
 
 		//Caractéristiques du produit affiché
@@ -28,8 +43,15 @@ class  Produit  extends  CI_Model
 		$result['additif'] = $list_add;
 
 		//Ingredients contenus dans le produit
-		//TODO
-		//$result['ingredient'] = "";
+		$result['ingredient'] = array();
+		$list_ing = array();
+		$list_ing = $this->db->query("SELECT * FROM openfoodfacts._ingredientcontenusproduit WHERE id_produit = $id")->result_array();
+		if(!empty($list_ing)){
+			foreach($list_ing as $ing){
+				$result['firstRankIngredient'][] = $ing['ingredients_text'];
+				$this->getIngredientList($ing['ingredients_text'], $result['ingredient']);
+			}
+		}
 
 
 		//Reference du produit (importation)
