@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 
-<h1>Liste des produits</h1>
+<h1 class="display-3 mb-5">Liste des produits</h1>
 
 <p style="text-align: right;">
     <?php if($currentNbProduct == 25) : ?>

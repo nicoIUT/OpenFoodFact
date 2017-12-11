@@ -42,8 +42,14 @@ class  Produit  extends  CI_Model
 		}
 		$result['additif'] = $list_add;
 
+		//Pays dans lesquels sont commercialisé l'ingredient
+        $result['pays'] = $this->db->query("SELECT pays 
+                                          FROM openfoodfacts._produit INNER JOIN openfoodfacts._payscommercialiseproduit 
+                                          ON openfoodfacts._produit.id_produit = openfoodfacts._payscommercialiseproduit.id_produit
+                                          WHERE openfoodfacts._payscommercialiseproduit.id_produit = $id")->result_array();
 
-        
+
+        //Ingredients contenus dans le produit si celui ci a été importé (sous forme de texte)
         $result['ingredient_text'] = $this->db->query("SELECT *
                                     FROM openfoodfacts._ingredientTexte
                                     WHERE id_produit = $id")->row_array();

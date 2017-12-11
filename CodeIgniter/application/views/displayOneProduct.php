@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+if(empty($product['product']['product_name'])){
+    show_404();
+}
+
 function ingredientTree($ingredient, $tree){
 	echo $ingredient.'<br/>';
 	if(!array_key_exists($ingredient, $tree)){
@@ -38,7 +42,11 @@ function ingredientTree($ingredient, $tree){
 			</tr>
 			<tr>
 				<th>Pays</th>
-				<td><?php echo $product['product']['countries_fr'] ?></td>
+				<td>
+                    <?php foreach ($product['pays'] as $pays){
+                       echo $pays['pays']." ";
+                    }?>
+                </td>
 			</tr>
 		</table>
 
