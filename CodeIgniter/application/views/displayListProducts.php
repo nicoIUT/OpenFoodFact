@@ -3,9 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 
-<h1>mettre quelque chose ici</h1>
-<h3><?php echo $product['count']['count'];?></h3>
-<h4><?php echo $nbPage ?></h4>
+<h1>Liste des produits</h1>
+<p style="text-align: right;">
+    <?php if($currentNbProduct == 25) : ?>
+        <a href='#'><input type='button' value='Afficher par 25' disabled/></a>
+    <?php else : ?>
+        <a href='<?php echo site_url()."/Produits/listProduct/0/25"; ?>'><input type='button' value='Afficher par 25'/></a>
+    <?php endif ?>
+    <?php if($currentNbProduct == 50) : ?>
+        <a href='#'><input type='button' value='Afficher par 50' disabled/></a>
+    <?php else : ?>
+        <a href='<?php echo site_url()."/Produits/listProduct/0/50"; ?>'><input type='button' value='Afficher par 50'/></a>
+    <?php endif ?>
+</p>
+
 <table class="table table-striped table-sm">
     <tr>
         <th>ID</th>
@@ -24,14 +35,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }?>
 </table>
 
-<?php if ($currentPage == 0) :?>
-    <a href='#'><input type='button' value='Précédent' disabled/></a>
-<?php else : ?>
-    <a href='#'><input type='button' value='Précédent'/></a>
-<?php endif; ?>
-<?php echo $currentPage ?>
-<?php if ($currentPage >= $nbPage-1) : ?>
-    <a href='#'><input type='button' value='Suivant' disabled/></a>
-<?php else : ?>
-    <a href='#'><input type='button' value='Suivant'/></a>
-<?php endif; ?>
+<p style="text-align: center;">
+    <?php if ($currentPage == 0) :?>
+        <a href='#'><input type='button' value='Précédent' disabled/></a>
+    <?php else : ?>
+        <a href='<?php echo site_url()."/Produits/listProduct/".($currentPage-1)."/".$currentNbProduct; ?>'><input type='button' value='Précédent'/></a>
+    <?php endif; ?>
+    <?php echo ($currentPage+1)." / ".($nbPage); ?>
+    <?php if ($currentPage >= $nbPage-1) : ?>
+        <a href='#'><input type='button' value='Suivant' disabled/></a>
+    <?php else : ?>
+        <a href='<?php echo site_url()."/Produits/listProduct/".($currentPage+1)."/".$currentNbProduct; ?>'><input type='button' value='Suivant'/></a>
+    <?php endif; ?>
+</p>

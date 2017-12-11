@@ -47,6 +47,7 @@ class Produits extends CI_Controller {
             $data['product'] = $this->Produit->getProductList($page, $nbProduct);
             $data['nbPage'] = $this->nbPage($data['product']['count']['count'], $nbProduct);
             $data['currentPage'] = $page;
+            $data['currentNbProduct'] = $nbProduct;
 
             $this->load->vars($data);
             $this->load->view('template');
