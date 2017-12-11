@@ -77,12 +77,12 @@ class  Produit  extends  CI_Model
 
 	    $result['list'] = $this->db->query("SELECT id_produit, product_name, brands 
 	                            FROM openfoodfacts._produit
-	                            WHERE product_name LIKE '%$productName%' 
+	                            WHERE UPPER(product_name) LIKE UPPER('%$productName%') 
 	                            LIMIT $nbProduct OFFSET $page*$nbProduct")->result_array();
 
 	    $result['count'] = $this->db->query("SELECT count(*) count 
                                             FROM openfoodfacts._produit
-                                            WHERE product_name LIKE '%$productName%'")->row_array();
+                                            WHERE UPPER(product_name) LIKE UPPER('%$productName%')")->row_array();
 
         return $result;
     }
