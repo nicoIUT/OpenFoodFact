@@ -54,6 +54,12 @@ CONSTRAINT _produit_pk PRIMARY KEY (id_produit),
 CONSTRAINT _produit_fk1 FOREIGN KEY (brands) REFERENCES openfoodfacts._marque(nom),
 CONSTRAINT _produit_fk2 FOREIGN KEY (countries_fr) REFERENCES openfoodfacts._pays(nom));
 
+CREATE TABLE openfoodfacts._ingredientTexte(
+id_produit int,
+ingredient_text text,
+CONSTRAINT _ingredientTexte_pk PRIMARY KEY (ingredient_text),
+CONSTRAINT _ingredientTexte_fk FOREIGN KEY (id_produit) REFERENCES openfoodfacts._produit(id_produit));
+
 CREATE TABLE openfoodfacts._reference(
 id_reference int,
 url varchar(255),
