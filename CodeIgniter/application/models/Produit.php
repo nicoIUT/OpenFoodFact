@@ -42,13 +42,13 @@ class  Produit  extends  CI_Model
 		}
 		$result['additif'] = $list_add;
 
-/*
-        @TODO
+
+        
         $result['ingredient_text'] = $this->db->query("SELECT *
                                     FROM openfoodfacts._ingredientTexte
                                     WHERE id_produit = $id")->row_array();
 
-*/
+
 
 		//Ingredients contenus dans le produit
 		$result['ingredient'] = array();

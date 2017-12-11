@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-/*
+
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'servbdd',
@@ -94,8 +94,8 @@ $db['default'] = array(
 	'stricton' => FALSE,
 	'failover' => array(),
     'save_queries' => TRUE
-    */
 
+/*
 $db['default'] = array(
     'dsn'	=> '',
     'hostname' => 'horton.elephantsql.com',
@@ -117,5 +117,5 @@ $db['default'] = array(
     'stricton' => FALSE,
     'failover' => array(),
     'save_queries' => TRUE
-
+*/
 );
