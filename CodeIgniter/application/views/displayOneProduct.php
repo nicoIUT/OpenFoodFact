@@ -83,10 +83,14 @@ function ingredientTree($ingredient, $tree){
 		<?php endif ?>
 
 		<h2>Ingredients</h2>
-		<?php if(!empty($product['ingredient'])){
-			foreach($product['firstRankIngredient'] as $ingredient){
-				ingredientTree($ingredient, $product['ingredient']);
-			}
+		<?php if(!empty($product['ingredient'])) {
+            foreach ($product['firstRankIngredient'] as $ingredient) {
+                ingredientTree($ingredient, $product['ingredient']);
+            }
+           /* @TODO
+        }else if(!empty($product[''])){
+            echo $product['ingredient_text']['ingredient_text'];
+            */
 		}else{
 			echo "<p>Aucun ingrédients renseignés</p>";
 		}
