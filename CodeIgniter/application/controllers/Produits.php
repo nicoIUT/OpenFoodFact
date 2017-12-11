@@ -12,10 +12,7 @@ class Produits extends CI_Controller {
     }
 
     public function index(){
-        $data['title'] = 'ok';
-        $data['content'] = 'ok';
-        $this->load->vars($data);
-        $this->load->view('template');
+        $this->listProduct();
     }
 
     public function display($id){
@@ -29,6 +26,30 @@ class Produits extends CI_Controller {
             }else{
                 show_404();
             }
+        }else{
+            show_404();
+        }
+    }
+
+    public function nbPage($nbProduct, $productPerPage){
+        $result = $nbProduct/$productPerPage;
+        $result = intval($result);
+        if($nbProduct % $productPerPage !=0){
+            $result = $result+1;
+        }
+        return $result;
+    }
+
+    public function listProduct($page = 0, $nbProduct = 2){
+        if(preg_match("#^[0-9]+$#", $page) AND preg_match("#^[0-9]+$#", $nbProduct)) {
+            $data['title'] = "page : ".($page+1);
+            $data['content'] = 'displayListProducts';
+            $data['product'] = $this->Produit->getProductList($page, $nbProduct);
+            $data['nbPage'] = $this->nbPage($data['product']['count']['count'], $nbProduct);
+            $data['currentPage'] = $page;
+
+            $this->load->vars($data);
+            $this->load->view('template');
         }else{
             show_404();
         }

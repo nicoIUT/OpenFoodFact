@@ -11,8 +11,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <body>
         <nav class="navbar bg-light">
-        <!--@TODO Changer le # pour l'adresse de la liste de produit-->
-            <a class="navbar-brand" href="#">OpenFoodFacts</a>
+            <a class="navbar-brand" href='<?php echo base_url()."index.php/Produits/listProduct/" ?>'>OpenFoodFacts</a>
+            <!-- @TODO ne pas oublier de prendre le lien de nicolas -->
+            <a href="#"><input type="button" value="Recherche avancée..."></a>
         </nav>
 
         <div class="container">
