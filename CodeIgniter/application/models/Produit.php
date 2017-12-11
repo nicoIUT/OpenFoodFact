@@ -72,16 +72,18 @@ class  Produit  extends  CI_Model
         return $result;
     }
 
-    public function getProductList($page, $nbProduct){
+    public function getProductList($page, $nbProduct, $productName =''){
 	    $result = array();
 
 	    $result['list'] = $this->db->query("SELECT id_produit, product_name, brands 
 	                            FROM openfoodfacts._produit
+	                            WHERE product_name LIKE '%$productName%' 
 	                            LIMIT $nbProduct OFFSET $page*$nbProduct")->result_array();
 
-	    $result['count'] = $this->db->query("SELECT count(*) count FROM openfoodfacts._produit")->row_array();
+	    $result['count'] = $this->db->query("SELECT count(*) count 
+                                            FROM openfoodfacts._produit
+                                            WHERE product_name LIKE '%$productName%'")->row_array();
 
         return $result;
     }
-
 }
