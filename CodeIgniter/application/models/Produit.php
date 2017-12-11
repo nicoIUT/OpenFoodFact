@@ -75,6 +75,7 @@ class  Produit  extends  CI_Model
 												INNER JOIN openfoodfacts._contributeur
 												ON openfoodfacts._produit.id_produit = openfoodfacts._contributeur.id_compte
 												WHERE openfoodfacts._produit.id_produit = $id")->row_array();
+	
 
 
         return $result;

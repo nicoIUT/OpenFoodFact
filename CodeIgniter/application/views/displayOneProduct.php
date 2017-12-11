@@ -172,7 +172,7 @@ function ingredientTree($ingredient, $tree){
 
 <h2>Informations complementaires</h2>
 <table class="table table-sm">
-		<?php if(empty($product['product']['contributeur'])){
+		<?php if(!empty($product['reference'])){
 			//Dans le cas d'une importation depuis un site tierce
 			echo "</tr>";
 			echo "<th>Importé depuis</th>";
@@ -180,7 +180,7 @@ function ingredientTree($ingredient, $tree){
 			echo "</tr>";
 		}else{
 			//Dans le cas d'un contributeur enregistré sur le site
-			echo "non importé";
+			echo "<th>non importé</th>";
 		}
 		?>
 
