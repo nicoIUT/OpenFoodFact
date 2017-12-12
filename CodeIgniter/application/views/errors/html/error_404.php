@@ -63,7 +63,7 @@ p {
 <body>
 	<div id="container">
 		<h1><?php echo "404 - Page introuvable"; ?></h1>
-        <div id ="image"><?php echo "<img class=\"img-responsive\" src=\"".base_url()."assets/image/error404.png\" alt='ERREUR 404'/>"; ?></div>
+        <div id ="image"><?php echo "<img class=\"img-responsive\" src=\"".base_url()."assets/image/imageerreur.png\" alt='ERREUR 404'/>"; ?></div>
 		<?php echo "</br> La page demandée n'a pas pu être trouvée"; ?>
 	</div>
 </body>
