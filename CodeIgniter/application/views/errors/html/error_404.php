@@ -53,12 +53,18 @@ code {
 p {
 	margin: 12px 15px 12px 15px;
 }
+
+#image {
+    text-align: center;
+}
+
 </style>
 </head>
 <body>
 	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+		<h1><?php echo "404 - Page introuvable"; ?></h1>
+        <div id ="image"><?php echo "<img class=\"img-responsive\" src=\"".base_url()."assets/image/404/error404.png\" alt='ERREUR 404'/>"; ?></div>
+		<?php echo "</br> La page demandée n'a pas pu être trouvée"; ?>
 	</div>
 </body>
 </html>

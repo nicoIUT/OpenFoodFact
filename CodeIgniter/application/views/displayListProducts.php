@@ -3,18 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 
-<h1>Liste des produits</h1>
+<h1 class="display-3 mb-5">Liste des produits</h1>
 
 <p style="text-align: right;">
     <?php if($currentNbProduct == 25) : ?>
-        <a href='#'><input type='button' value='Afficher par 25' disabled/></a>
+        <a href='#'><button type='button' class= 'btn btn-primary' value='Afficher par 25' disabled>Afficher par 25</button></a>
     <?php else : ?>
-        <a href='<?php echo site_url()."/Produits/listProduct/0/25"."/".$search; ?>'><input type='button' value='Afficher par 25'/></a>
+        <a href='<?php echo site_url()."/Produits/listProduct/0/25"."/".$search; ?>'><button type='button' class= 'btn btn-primary'  value='Afficher par 25'>Afficher par 25</button></a>
     <?php endif ?>
     <?php if($currentNbProduct == 50) : ?>
-        <a href='#'><input type='button' value='Afficher par 50' disabled/></a>
+        <a href='#'><button type='button' class= 'btn btn-primary'  value='Afficher par 50' disabled>Afficher par 50</button></a>
     <?php else : ?>
-        <a href='<?php echo site_url()."/Produits/listProduct/0/50"."/".$search; ?>'><input type='button' value='Afficher par 50'/></a>
+        <a href='<?php echo site_url()."/Produits/listProduct/0/50"."/".$search; ?>'><button type='button' class= 'btn btn-primary'  value='Afficher par 50'>Afficher par 50</button></a>
     <?php endif ?>
 </p>
 
@@ -31,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
        echo "<td>".$prod['id_produit']."</td>";
        echo "<td>".$prod['product_name']."</td>";
        echo "<td>".$prod['brands']."</td>";
-       echo "<td><a href='$urlID'><input type='button' value='Consulter'/></a></td>";
+       echo "<td><a href='$urlID'><button type='button' class= 'btn btn-primary'  value='Consulter'>Consulter</button></a></td>";
        echo '</tr>';
     }?>
 </table>
@@ -41,15 +41,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php echo "Aucun produit à afficher"?>
     <?php else : ?>
         <?php if ($currentPage == 0) :?>
-            <a href='#'><input type='button' value='Précédent' disabled/></a>
+            <a href='#'><button type='button' class= 'btn btn-primary' value='Précédent' disabled>Précédent</button></a>
         <?php else : ?>
-            <a href='<?php echo site_url()."/Produits/listProduct/".($currentPage-1)."/".$currentNbProduct."/".$search; ?>'><input type='button' value='Précédent'/></a>
+            <a href='<?php echo site_url()."/Produits/listProduct/".($currentPage-1)."/".$currentNbProduct."/".$search; ?>'><button type='button' class= 'btn btn-primary' value='Précédent'>Précédent</button></a>
         <?php endif; ?>
         <?php echo ($currentPage+1)." / ".($nbPage); ?>
         <?php if ($currentPage >= $nbPage-1) : ?>
-            <a href='#'><input type='button' value='Suivant' disabled/></a>
+            <a href='#'><button type='button' class= 'btn btn-primary' value='Suivant' disabled>Suivant</button></a>
         <?php else : ?>
-            <a href='<?php echo site_url()."/Produits/listProduct/".($currentPage+1)."/".$currentNbProduct."/".$search; ?>'><input type='button' value='Suivant'/></a>
+            <a href='<?php echo site_url()."/Produits/listProduct/".($currentPage+1)."/".$currentNbProduct."/".$search; ?>'><button type='button' class= 'btn btn-primary' value='Suivant'>Suivant</button></a>
         <?php endif; ?>
     <?php endif; ?>
 </p>

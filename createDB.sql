@@ -31,7 +31,6 @@ created_t timestamp,
 last_modified_t timestamp,
 product_name varchar(100),
 brands varchar(100),
-countries_fr varchar(100),
 serving_size varchar(100),
 nutrition_grade_fr varchar(1),
 energy_100g decimal,
@@ -51,8 +50,7 @@ calcium_100g decimal,
 iron_100g decimal,
 nutrition_score_fr_100g int,
 CONSTRAINT _produit_pk PRIMARY KEY (id_produit),
-CONSTRAINT _produit_fk1 FOREIGN KEY (brands) REFERENCES openfoodfacts._marque(nom),
-CONSTRAINT _produit_fk2 FOREIGN KEY (countries_fr) REFERENCES openfoodfacts._pays(nom));
+CONSTRAINT _produit_fk1 FOREIGN KEY (brands) REFERENCES openfoodfacts._marque(nom));
 
 CREATE TABLE openfoodfacts._ingredientTexte(
 id_produit int,
@@ -97,6 +95,13 @@ CONSTRAINT _ingredientcontenus_fk1 FOREIGN KEY (ingredients_contenu) REFERENCES 
 CONSTRAINT _ingredientcontenus_fk2 FOREIGN KEY (ingredients_contenant) REFERENCES openfoodfacts._ingredient(ingredients_text)
 );
 
+CREATE TABLE openfoodfacts._payscommercialiseproduit(
+id_produit int,
+pays varchar(100),
+CONSTRAINT _payscommercialiseproduit_pk PRIMARY KEY (id_produit, pays),
+CONSTRAINT _payscommecialiseproduit_fk1 FOREIGN KEY (id_produit) REFERENCES openfoodfacts._produit(id_produit),
+CONSTRAINT _payscommecialiseproduit_fk2 FOREIGN KEY (pays) REFERENCES openfoodfacts._pays(nom));
+
 
 /*
 INSERT INTO openfoodfacts._produit(
@@ -104,7 +109,6 @@ created_t,
 last_modified_t,
 product_name,
 brands,
-countries_fr,
 serving_size,
 nutrition_grade_fr,
 energy_100g,
@@ -128,9 +132,8 @@ now(),
 now(),
 'Spagheti',
 'Panzani',
-'france',
 'paquet',
-'f',
+'b',
 1,
 2,
 3,
