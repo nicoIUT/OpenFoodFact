@@ -67,57 +67,6 @@ class Produits extends CI_Controller {
 
         redirect("Produits/listProduct/0/25/$nameProduct");
     }
-    /*
-      public function formSearchAvance($brands = 0 , $pays = 0 ,$ingredients=0 ){
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-	
-
-       
-		$brands = $this->input->post('brands');
-		$pays = $this->input->post('pays');
-		$ingredients=$this->input->post('ingredients');
-		
-		 if(preg_match("#^[0-9]+$#", $page) AND preg_match("#^[0-9]+$#", $nbProduct)) {
-            $data['title'] = "page : ".($page+1);
-            $data['content'] = 'displayListProducts';
-            if ( $brands = 1 ) {
-            $data['product'] = $this->Produit->getProducts_by_brands($page, $nbProduct, $search);
-			}
-			else if ( $pays = 1 ) {
-            $data['product'] = $this->Produit->getProducts_by_pays($page, $nbProduct, $search);
-			}
-			else if ( $ingredients = 1 ) {
-            $data['product'] = $this->Produit->getProducts_by_ingredients($page, $nbProduct, $search);
-			}
-            $data['nbPage'] = $this->nbPage($data['product']['count']['count'], $nbProduct);
-            $data['currentPage'] = $page;
-            $data['currentNbProduct'] = $nbProduct;
-            $data['search'] = $search;
-            
-             
-			if  (!empty($_POST['advance'] )) {	
-				$data['recherche'] = 'display_empty';
-			}
-			else  {	
-			
-				$data['recherche'] = 'displaychoise';
-			
-			}
-			
-			
-           
-            $this->load->vars($data);
-            $this->load->view('template');
-        }else{
-            show_404();
-        }
-        
-
-        
-    }
-	*/
-
 
 }
 

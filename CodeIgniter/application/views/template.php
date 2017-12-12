@@ -19,15 +19,8 @@ $this->load->helper('form');
             <button type='submit' class= 'btn btn-primary'  value="Rechercher">Rechercher</button>
             </form>
             <!-- @TODO ne pas oublier de prendre le lien de nicolas -->
-<<<<<<< HEAD
-            
-            <a href="#"><input type="button" value="Recherche avancée" name="advance"></a>
-				<div class="container">
-				 
-				</div>
-=======
             <a href="#"><button type='button' class= 'btn btn-primary'  value="Recherche avancée...">Recherche avancée...</button></a>
->>>>>>> 38145682ab8d2128c6fce3cce9fc68e62e3dc2ba
+
         </nav>
 
         <div class="container">
