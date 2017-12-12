@@ -95,4 +95,19 @@ class  Produit  extends  CI_Model
 
         return $result;
     }
+    
+    public function get_Products_by_brands ( ) {
+		
+		
+	}
+	public function get_products_by_pays () {
+		
+	}
+	
+	public function get_Produts_by_ingredients () {
+		
+	}
+		
+    
+    
 }

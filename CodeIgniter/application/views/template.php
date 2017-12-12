@@ -19,7 +19,11 @@ $this->load->helper('form');
             <input type="submit" value="Rechercher">
             </form>
             <!-- @TODO ne pas oublier de prendre le lien de nicolas -->
-            <a href="#"><input type="button" value="Recherche avancée..."></a>
+            
+            <a href="#"><input type="button" value="Recherche avancée" name="advance"></a>
+				<div class="container">
+				 
+				</div>
         </nav>
 
         <div class="container">
