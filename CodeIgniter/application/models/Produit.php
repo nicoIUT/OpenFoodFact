@@ -7,7 +7,7 @@ class  Produit  extends  CI_Model
         $this->load->library('session');
 	}
 
-	
+	//Recupere les ingredient contenu dans les autres ingredient (par recursivité)
 	public function getIngredientList($id, &$ingredientCollector){
 		if(array_key_exists($id, $ingredientCollector)){
 			return;
@@ -88,14 +88,21 @@ class  Produit  extends  CI_Model
         return $result;
     }
 
+    //Gere l'affichage de la liste des produits
     public function getProductList($page, $nbProduct, $productName =''){
+	    //$page > page désirée
+        //$nbProduct > nombre de produit affiché sur la page
+        //$productName > filtre sur le nom de produit
+
 	    $result = array();
 
+	    //$result['list'] renvoie une partie de la base ($nbproduit)
 	    $result['list'] = $this->db->query("SELECT id_produit, product_name, brands 
 	                            FROM openfoodfacts._produit
 	                            WHERE UPPER(product_name) LIKE UPPER('%$productName%') 
 	                            LIMIT $nbProduct OFFSET $page*$nbProduct")->result_array();
 
+	    //$result['count'] est le nombre de produit total de la base
 	    $result['count'] = $this->db->query("SELECT count(*) count 
                                             FROM openfoodfacts._produit
                                             WHERE UPPER(product_name) LIKE UPPER('%$productName%')")->row_array();

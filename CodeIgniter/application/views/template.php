@@ -17,9 +17,11 @@ $this->load->helper('form');
             <?php echo form_open('Produits/formSearchProductByName'); ?>
             <input type="text" name="nameProduct" placeholder="Recherche par nom">
             <button type='submit' class= 'btn btn-primary'  value="Rechercher">Rechercher</button>
-            </form>
-            <!-- @TODO ne pas oublier de prendre le lien de nicolas -->
+            <!-- @TODO prendre le lien de nicolas-->
             <a href="#"><button type='button' class= 'btn btn-primary'  value="Recherche avancée...">Recherche avancée...</button></a>
+            </form>
+
+
 
         </nav>
 

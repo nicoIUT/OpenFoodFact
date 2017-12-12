@@ -5,6 +5,7 @@ if(empty($product['product']['product_name'])){
     show_404();
 }
 
+//Affichage des ingredients (recursif)
 function ingredientTree($ingredient, $tree){
 	echo $ingredient.'<br/>';
 	if(!array_key_exists($ingredient, $tree)){
@@ -92,10 +93,12 @@ function ingredientTree($ingredient, $tree){
 
 		<h2>Ingredients</h2>
 		<?php if(!empty($product['ingredient'])) {
+		    //Dans le cas d'un produit ajouté
             foreach ($product['firstRankIngredient'] as $ingredient) {
                 ingredientTree($ingredient, $product['ingredient']);
             }
         }else if(!empty($product['ingredient_text'])){
+		    //Dans le cas d'un produit importé
             echo $product['ingredient_text']['ingredient_text'];
 		}else{
 			echo "<p>Aucun ingrédients renseignés</p>";

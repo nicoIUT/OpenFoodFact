@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <h1 class="display-3 mb-5">Liste des produits</h1>
 
+<!--Boutons de nombre de produit / page-->
 <p style="text-align: right;">
     <?php if($currentNbProduct == 25) : ?>
         <a href='#'><button type='button' class= 'btn btn-primary' value='Afficher par 25' disabled>Afficher par 25</button></a>
@@ -36,6 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }?>
 </table>
 
+<!--Boutons precedents / suivants-->
 <p style="text-align: center;">
     <?php if(empty($product['list'])) : ?>
         <?php echo "Aucun produit à afficher"?>

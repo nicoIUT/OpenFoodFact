@@ -31,6 +31,7 @@ class Produits extends CI_Controller {
         }
     }
 
+    //Fonction pour determiner le nombre de page necessaire
     public function nbPage($nbProduct, $productPerPage){
         $result = $nbProduct/$productPerPage;
         $result = intval($result);
@@ -57,6 +58,7 @@ class Produits extends CI_Controller {
         }
     }
 
+    //Concerne le formulaire de quicksearch en haut de page
     public function formSearchProductByName(){
         $this->load->helper('form');
         $this->load->library('form_validation');
