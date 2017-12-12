@@ -9,6 +9,7 @@ class Recherche extends CI_Controller {
         $this->load->helper('html');
 
         $this->load->model('Produit');
+        $this->load->model('Produit_model');
     }
 
     public function index(){
@@ -17,9 +18,12 @@ class Recherche extends CI_Controller {
 
     public function display($id){
         if(preg_match("#^[0-9]+$#", $id)){
-            $data['title'] = 'Produit:'.$id;
-            $data['content'] = 'displayOneProduct';
-            $data['product'] = $this->Produit->getProductByID($id);
+           
+            $data['additifs'] = $this->Produit->get_brands() ; 
+            $data['ingredients'] = $this->Produit->getIngredientList();
+            $data['$additifs'] = $this->Produit->get_additifs() ; 
+           
+            $data['pays']= $this -> get_pays() ;  
             if(isset($data['product'])){
                 $this->load->vars($data);
                 $this->load->view('template_recherche');
@@ -40,7 +44,7 @@ class Recherche extends CI_Controller {
         return $result;
     }
 
-    public function listProduct($page = 0, $nbProduct = 25, $search = "" , $brand = "" , $ingredients =""){
+    public function listProduct($page = 0, $nbProduct = 25, $search = "" , $brand = "" , $ingredients ="" ,  $additifs ="" ){
         if(preg_match("#^[0-9]+$#", $page) AND preg_match("#^[0-9]+$#", $nbProduct)) {
             $data['title'] = "page : ".($page+1);
             $data['content'] = 'displayListProducts';
@@ -48,9 +52,10 @@ class Recherche extends CI_Controller {
             $data['nbPage'] = $this->nbPage($data['product']['count']['count'], $nbProduct);
             $data['currentPage'] = $page;
             $data['currentNbProduct'] = $nbProduct;
+            
             $data['search'] = $search;
             $this->load->vars($data);
-            $this->load->view('template_recherche');
+            $this->load->view('template');
             
         }else{
             show_404();
@@ -61,14 +66,17 @@ class Recherche extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-      //  $this->form_validation->set_rules('nameProduct', 'nameProduct', 'required');
+        $this->form_validation->set_rules('nameProduct', 'nameProduct', 'required');
 
-        $nameProduct = $this->input->post('nameProduct');
+         $nameProduct = $this->input->post('nameProduct');
         $brandProduct = $this->input->post('brandProduct');
-        $ingredients = $this->input->post('nameProduct');
+        $ingredients = $this->input->post('ingredients');
+         $additifs = $this->input->post('additifs');
        
 
-        redirect("recherche/listProduct/0/25/$nameProduct/$bransProduct/$ingredients");
+       
+
+        redirect("recherche/listProduct/0/25/$nameProduct/$bransProduct/$ingredients/$additifs");
     }
     
   
