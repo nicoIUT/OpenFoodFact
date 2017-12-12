@@ -7,6 +7,7 @@ class  Produit  extends  CI_Model
         $this->load->library('session');
 	}
 
+	
 	public function getIngredientList($id, &$ingredientCollector){
 		if(array_key_exists($id, $ingredientCollector)){
 			return;
@@ -102,18 +103,6 @@ class  Produit  extends  CI_Model
         return $result;
     }
     
-    public function get_Products_by_brands ( ) {
 		
-		
-	}
-	public function get_products_by_pays () {
-		
-	}
-	
-	public function get_Produts_by_ingredients () {
-		
-	}
-		
-    
-    
+
 }
