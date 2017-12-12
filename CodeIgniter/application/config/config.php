@@ -23,20 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-// pour le config.php de CodeIgniter
-// définition de l'URL de base
-if  (isset($_SERVER["HTTP_X_FORWARDED_HOST"])){
-	$config['base_url'] = "http://".$_SERVER['HTTP_X_FORWARDED_HOST'];
-}
-else{
-	$config['base_url'] = "http://".$_SERVER['HTTP_HOST'];
-}
-
-// insertion du chemin relatif
-// montage sur /var/www/etuinfo/
-$rel_path = str_replace('/var/www/etuinfo/', '',getcwd());
-
-$config['base_url'] .= '/'.$rel_path.'/';
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
