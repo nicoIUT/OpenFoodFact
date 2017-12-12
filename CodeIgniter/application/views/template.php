@@ -16,7 +16,7 @@ $this->load->helper('form');
             <a class="navbar-brand" href='<?php echo base_url()."index.php/Produits/listProduct/" ?>'>OpenFoodFacts</a>
             <?php echo form_open('Produits/formSearchProductByName'); ?>
             <input type="text" name="nameProduct" placeholder="Recherche par nom">
-            <button type='button' class= 'btn btn-primary'  value="Rechercher">Rechercher</button>
+            <button type='submit' class= 'btn btn-primary'  value="Rechercher">Rechercher</button>
             </form>
             <!-- @TODO ne pas oublier de prendre le lien de nicolas -->
             <a href="#"><button type='button' class= 'btn btn-primary'  value="Recherche avancée...">Recherche avancée...</button></a>
