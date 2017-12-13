@@ -118,63 +118,123 @@ function ingredientTree($ingredient, $tree){
 			</tr>
 			<tr>
 				<td>Graisse</td>
-				<td><?php echo $product['product']['fat_100g'] ?></td>
+                <?php if(!isset($product['product']['fat_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['fat_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Graisse saturée</td>
-				<td><?php echo $product['product']['satured_fat_100g'] ?></td>
+                <?php if(!isset($product['product']['satured_fat_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['satured_fat_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Graisse trans</td>
-				<td><?php echo $product['product']['trans_fat_100g'] ?></td>
+                <?php if(!isset($product['product']['trans_fat_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['trans_fat_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Cholesterol</td>
-				<td><?php echo $product['product']['cholesterol_100g'] ?></td>
+                <?php if(!isset($product['product']['cholesterol_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['cholesterol_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Carbohydrates</td>
-				<td><?php echo $product['product']['carbohydrates_100g'] ?></td>
+                <?php if(!isset($product['product']['carbohydrates_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['carbohydrates_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Sucres</td>
-				<td><?php echo $product['product']['sugars_100g'] ?></td>
+                <?php if(!isset($product['product']['sugars_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['sugars_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Fibres</td>
-				<td><?php echo $product['product']['fibers_100g'] ?></td>
+                <?php if(!isset($product['product']['fibers_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['fibers_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Protéines</td>
-				<td><?php echo $product['product']['proteins_100g'] ?></td>
+                <?php if(!isset($product['product']['proteins_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['proteins_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Sel</td>
-				<td><?php echo $product['product']['salt_100g'] ?></td>
+                <?php if(!isset($product['product']['salt_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+                    <td><?php echo $product['product']['salt_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Sodium</td>
-				<td><?php echo $product['product']['sodium_100g'] ?></td>
+                <?php if(!isset($product['product']['sodium_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['sodium_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Vitamine A</td>
-				<td><?php echo $product['product']['vitamin_a_100g'] ?></td>
+                <?php if(!isset($product['product']['vitamin_a_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['vitamin_a_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Vitamine C</td>
-				<td><?php echo $product['product']['vitamin_c_100g'] ?></td>
+                <?php if(!isset($product['product']['vitamin_c_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['vitamin_c_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Calcium</td>
-				<td><?php echo $product['product']['calcium_100g'] ?></td>
+                <?php if(!isset($product['product']['calcium_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['calcium_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Fer</td>
-				<td><?php echo $product['product']['iron_100g'] ?></td>
+                <?php if(!isset($product['product']['iron_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['iron_100g']." g" ?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Score nutritif</td>
-				<td><?php echo $product['product']['nutrition_score_fr_100g'] ?></td>
+                <?php if(!isset($product['product']['nutrition_score_fr_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['nutrition_score_fr_100g'] ?></td>
+                <?php endif; ?>
 			</tr>
 		</table>
 	</div>
