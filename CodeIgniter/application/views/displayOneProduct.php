@@ -114,7 +114,11 @@ function ingredientTree($ingredient, $tree){
 			</tr>
 			<tr>
 				<td>Energie</td>
-				<td><?php echo $product['product']['energy_100g'] ?></td>
+                <?php if(!isset($product['product']['energy_100g'])) :?>
+                    <td><?php echo "non renseigné"?></td>
+                <?php else : ?>
+				    <td><?php echo $product['product']['energy_100g']." kj (".($product['product']['energy_100g'])*0.24." kcal)"?></td>
+                <?php endif; ?>
 			</tr>
 			<tr>
 				<td>Graisse</td>
