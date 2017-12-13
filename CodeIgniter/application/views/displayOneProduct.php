@@ -1,11 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-echo "arbre";
-print_r($product['ingredient']);
-echo "</br></br>premierrangingredient";
-print_r($product['firstRankIngredient']);
-
 if(empty($product['product']['product_name'])){
     show_404();
 }
