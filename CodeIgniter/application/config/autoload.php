@@ -133,3 +133,6 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array();
+
+//pour le base_url() qui ne marche pas partout
+$autoload['helper'] = array('url');

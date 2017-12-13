@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $this->load->helper('form');
+$this->load->helper('url');
 ?>
 
 <!DOCTYPE html>

@@ -11,15 +11,17 @@ class Recherche extends CI_Controller {
         $this->load->model('Produit');
         //$this->load->model('Produit_model');
     }
-
-    public function index(){
-        //$this->listProduct();
-        $data['title'] = "Recherche avancée";
+    
+    public function affichetemp(){
+		$data['title'] = "Recherche avancée";
         $data['content'] = "template_recherche";
 
         $this->load->vars($data);
         $this->load->view('templateRechercheAvancee');
+	}
 
+    public function index(){
+        $this->affichetemp();
     }
 
     public function display($id){
