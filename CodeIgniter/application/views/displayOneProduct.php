@@ -1,18 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+echo "arbre";
+print_r($product['ingredient']);
+echo "</br></br>premierrangingredient";
+print_r($product['firstRankIngredient']);
+
 if(empty($product['product']['product_name'])){
     show_404();
 }
 
 //Affichage des ingredients (recursif)
 function ingredientTree($ingredient, $tree){
-	echo $ingredient.'<br/>';
-	if(!array_key_exists($ingredient, $tree)){
+	echo $ingredient['ingredients_text'].'<br/>';
+	if(!array_key_exists($ingredient['id_ingredient'], $tree)){
 		return;
 	}
 	echo "<ul>";
-	foreach ($tree[$ingredient] as $subIngredient){
+	foreach ($tree[$ingredient['id_ingredient']] as $subIngredient){
 		echo '<li>';
 		ingredientTree($subIngredient, $tree);
 		echo '</li>';

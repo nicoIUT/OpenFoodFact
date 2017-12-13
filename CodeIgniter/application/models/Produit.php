@@ -12,11 +12,15 @@ class  Produit  extends  CI_Model
 		if(array_key_exists($id, $ingredientCollector)){
 			return;
 		}
-		$list_ing = $this->db->query("SELECT * FROM openfoodfacts._ingredientcontenusingredient WHERE ingredients_contenant = '$id'")->result_array();
+		$list_ing = $this->db->query("SELECT * 
+                                    FROM openfoodfacts._ingredientcontenusingredient 
+                                    INNER JOIN openfoodfacts._ingredient 
+                                    ON openfoodfacts._ingredientcontenusingredient.id_ingredient_contenu = openfoodfacts._ingredient.id_ingredient 
+                                    WHERE id_ingredient_contenant = '$id'")->result_array();
 		if(!empty($list_ing)){
 			foreach($list_ing as $ing){
-				$this->getIngredientList($ing['ingredients_contenu'], $ingredientCollector);
-				$ingredientCollector[$id][] = $ing['ingredients_contenu'];
+				$this->getIngredientList($ing['id_ingredient_contenu'], $ingredientCollector);
+				$ingredientCollector[$id][] = $ing;
 			}
 		}
 	}
@@ -60,11 +64,15 @@ class  Produit  extends  CI_Model
 		//Ingredients contenus dans le produit
 		$result['ingredient'] = array();
 		$list_ing = array();
-		$list_ing = $this->db->query("SELECT * FROM openfoodfacts._ingredientcontenusproduit WHERE id_produit = $id")->result_array();
+		$list_ing = $this->db->query("SELECT openfoodfacts._ingredientcontenusproduit.id_ingredient, ingredients_text 
+                                    FROM openfoodfacts._ingredientcontenusproduit 
+                                    INNER JOIN openfoodfacts._ingredient 
+                                    ON openfoodfacts._ingredientcontenusproduit.id_ingredient = openfoodfacts._ingredient.id_ingredient
+                                    WHERE id_produit = $id")->result_array();
 		if(!empty($list_ing)){
 			foreach($list_ing as $ing){
-				$result['firstRankIngredient'][] = $ing['ingredients_text'];
-				$this->getIngredientList($ing['ingredients_text'], $result['ingredient']);
+				$result['firstRankIngredient'][] = $ing;
+				$this->getIngredientList($ing['id_ingredient'], $result['ingredient']);
 			}
 		}
 
