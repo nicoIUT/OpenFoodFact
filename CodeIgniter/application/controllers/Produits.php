@@ -70,6 +70,21 @@ class Produits extends CI_Controller {
         redirect("Produits/listProduct/0/25/$nameProduct");
     }
 
+    public function advancedResearch(){
+        $data['title'] = "Recherche avancée";
+        $data['content'] = 'advancedResearch';
+
+        $data['additifs'] = $this->Produit->getAdditif();
+        $data['marques'] = $this->Produit->getMarque();
+
+        $this->load->vars($data);
+        $this->load->view('advancedResearchTemplate');
+    }
+
+    public function formAdvancedSearch(){
+
+    }
+
 }
 
 

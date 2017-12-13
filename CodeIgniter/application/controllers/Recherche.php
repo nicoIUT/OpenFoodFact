@@ -17,7 +17,7 @@ class Recherche extends CI_Controller {
         $data['content'] = "template_recherche";
 
         $this->load->vars($data);
-        $this->load->view('templateRechercheAvancee');
+        $this->load->view('advancedResearchTemplate');
 	}
 
     public function index(){

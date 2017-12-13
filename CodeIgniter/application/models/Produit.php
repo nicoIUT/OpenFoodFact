@@ -117,7 +117,13 @@ class  Produit  extends  CI_Model
 
         return $result;
     }
-    
-		
+
+    public function getAdditif(){
+        return $this->db->query("SELECT * FROM openfoodfacts._additif")->result_array();
+    }
+
+    public function getMarque(){
+        return $this->db->query("SELECT * FROM openfoodfacts._marque")->result_array();
+    }
 
 }
