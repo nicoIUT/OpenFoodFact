@@ -42,23 +42,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </table>
 
         <h2>Nutri-score</h2>
-        <label class="custom-control custom-checkbox">
+        <label>
             <table class="table">
                 <tr>
                     <td>
-                        <input type="checkbox" value="nutriscoreA">
+                        <input type="checkbox" name="nutriscoreA" value="a">
                     </td>
                     <td>
-                        <input type="checkbox" value="nutriscoreB">
+                        <input type="checkbox" name="nutriscoreB" value="b">
                     </td>
                     <td>
-                        <input type="checkbox"  value="nutriscoreC">
+                        <input type="checkbox"  name="nutriscoreC" value="c">
                     </td>
                     <td>
-                        <input type="checkbox" value="nutriscoreD">
+                        <input type="checkbox" name="nutriscoreD" value="d">
                     </td>
                     <td>
-                        <input type="checkbox" value="nutriscoreE">
+                        <input type="checkbox" name="nutriscoreE" value="e">
                     </td>
                 </tr>
                 <tr>
@@ -119,100 +119,101 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <tr>
                 <td>Energie</td>
                 <td><input type="text" name="energie"></td>
-                <td><input type="checkbox" value="supenergie">></td>
-                <td><input type="checkbox" value="infenergie"><</td>
+                <td><input type="checkbox" name="supenergie" value=">">></td>
+                <td><input type="checkbox" name="infenergie" value="<"><</td>
             </tr>
             <tr>
                 <td>Graisse</td>
                 <td><input type="text" name="graisse"></td>
-                <td><input type="checkbox" value="supgraisse">></td>
-                <td><input type="checkbox" value="infgraisse"><</td>
+                <td><input type="checkbox" name="supgraisse" value=">">></td>
+                <td><input type="checkbox" name="infgraisse" value="<"><</td>
             </tr>
             <tr>
                 <td>Graisse saturée</td>
                 <td><input type="text" name="graisseSaturee"></td>
-                <td><input type="checkbox" value="supgraisseSaturee">></td>
-                <td><input type="checkbox" value="infgraisseSaturee"><</td>
+                <td><input type="checkbox" name="supgraisseSaturee" value=">">></td>
+                <td><input type="checkbox" name="infgraisseSaturee" value="<"><</td>
             </tr>
             <tr>
                 <td>Graisse trans</td>
                 <td><input type="text" name="graisseTrans"></td>
-                <td><input type="checkbox" value="supgraisseTrans">></td>
-                <td><input type="checkbox" value="infgraisseTrans"><</td>
+                <td><input type="checkbox" name="supgraisseTrans" value=">">></td>
+                <td><input type="checkbox" name="infgraisseTrans" value="<"><</td>
             </tr>
             <tr>
                 <td>Cholesterol</td>
                 <td><input type="text" name="cholesterol"></td>
-                <td><input type="checkbox" value="supcholesterol">></td>
-                <td><input type="checkbox" value="infcholesterol"><</td>
+                <td><input type="checkbox" name="supcholesterol" value=">">></td>
+                <td><input type="checkbox" name="infcholesterol" value="<"><</td>
             </tr>
             <tr>
                 <td>Carbohydrates</td>
                 <td><input type="text" name="carbohydrates"></td>
-                <td><input type="checkbox" value="supcarbohydrates">></td>
-                <td><input type="checkbox" value="infcarbohydrates"><</td>
+                <td><input type="checkbox" name="supcarbohydrates" value=">">></td>
+                <td><input type="checkbox" name="infcarbohydrates" value="<"><</td>
             </tr>
             <tr>
                 <td>Sucres</td>
                 <td><input type="text" name="sucre"></td>
-                <td><input type="checkbox" value="supsucre">></td>
-                <td><input type="checkbox" value="infsucre"><</td>
+                <td><input type="checkbox" name="supsucre" value=">">></td>
+                <td><input type="checkbox" name="infsucre" value="<"><</td>
             </tr>
             <tr>
                 <td>Fibres</td>
                 <td><input type="text" name="fibre"></td>
-                <td><input type="checkbox" value="supfibre">></td>
-                <td><input type="checkbox" value="inffibre"><</td>
+                <td><input type="checkbox" name="supfibre" value=">">></td>
+                <td><input type="checkbox" name="inffibre" value="<"><</td>
             </tr>
             <tr>
                 <td>Protéines</td>
                 <td><input type="text" name="proteine"></td>
-                <td><input type="checkbox" value="supproteine">></td>
-                <td><input type="checkbox" value="infproteine"><</td>
+                <td><input type="checkbox" name="supproteine" value=">">></td>
+                <td><input type="checkbox" name="infproteine" value="<"><</td>
             </tr>
             <tr>
                 <td>Sel</td>
                 <td><input type="text" name="sel"></td>
-                <td><input type="checkbox" value="supsel">></td>
-                <td><input type="checkbox" value="infsel"><</td>
+                <td><input type="checkbox" name="supsel" value=">">></td>
+                <td><input type="checkbox" name="infsel" value="<"><</td>
             </tr>
             <tr>
                 <td>Sodium</td>
                 <td><input type="text" name="sodium"></td>
-                <td><input type="checkbox" value="supsodium">></td>
-                <td><input type="checkbox" value="infsodium"><</td>
+                <td><input type="checkbox" name="supsodium" value=">">></td>
+                <td><input type="checkbox" name="infsodium" value="<"><</td>
             </tr>
             <tr>
                 <td>Vitamine A</td>
                 <td><input type="text" name="vitamineA"></td>
-                <td><input type="checkbox" value="supvitamineA">></td>
-                <td><input type="checkbox" value="infvitamineA"><</td>
+                <td><input type="checkbox" name="supvitamineA" value=">">></td>
+                <td><input type="checkbox" name="infvitamineA" value="<"><</td>
             </tr>
             <tr>
                 <td>Vitamine C</td>
                 <td><input type="text" name="vitamineC"></td>
-                <td><input type="checkbox" value="supvitamineC">></td>
-                <td><input type="checkbox" value="infvitamineC"><</td>
+                <td><input type="checkbox" name="supvitamineC" value=">">></td>
+                <td><input type="checkbox" name="infvitamineC" value="<"><</td>
             </tr>
             <tr>
                 <td>Calcium</td>
                 <td><input type="text" name="calcium"></td>
-                <td><input type="checkbox" value="supcalcium">></td>
-                <td><input type="checkbox" value="infcalcium"><</td>
+                <td><input type="checkbox" name="supcalcium" value=">">></td>
+                <td><input type="checkbox" name="infcalcium" value="<"><</td>
             </tr>
             <tr>
                 <td>Fer</td>
                 <td><input type="text" name="fer"></td>
-                <td><input type="checkbox" value="supfer">></td>
-                <td><input type="checkbox" value="inffer"><</td>
+                <td><input type="checkbox" name="supfer" value=">">></td>
+                <td><input type="checkbox" name="inffer" value="<"><</td>
             </tr>
             <tr>
                 <td>Score nutritif</td>
                 <td><input type="text" name="scoreNutritif"></td>
-                <td><input type="checkbox" value="supscoreNutritif">></td>
-                <td><input type="checkbox" value="infscoreNutritif"><</td>
+                <td><input type="checkbox" name="supscoreNutritif" value=">">></td>
+                <td><input type="checkbox" name="infscoreNutritif" value="<"><</td>
             </tr>
         </table>
     </div>
 </div>
+<button type='submit' class='btn btn-primary'  value="Rechercher">Lancer la recherche</button>
 </form>

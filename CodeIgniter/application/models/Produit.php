@@ -126,4 +126,8 @@ class  Produit  extends  CI_Model
         return $this->db->query("SELECT * FROM openfoodfacts._marque")->result_array();
     }
 
+    public function advancedResearchQuery(){
+
+    }
+
 }

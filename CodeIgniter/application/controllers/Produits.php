@@ -8,6 +8,8 @@ class Produits extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('html');
 
+        $this->load->library('session');
+
         $this->load->model('Produit');
     }
 
@@ -82,7 +84,36 @@ class Produits extends CI_Controller {
     }
 
     public function formAdvancedSearch(){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
 
+        //Ce qui concerne le produit en lui même (caracteristiques)
+        $nom = $this->input->post('nom');
+        $code = $this->input->post('code');
+        $portion = $this->input->post('portion');
+        $pays =  $this->input->post('pays');
+        $marque = $this->input->post('marque');
+
+        //Ce qui concerne le nutriscore
+        $nutriA = $this->input->post('nutriA');
+        $nutriB = $this->input->post('nutriB');
+        $nutriC = $this->input->post('nutriC');
+        $nutriD = $this->input->post('nutriD');
+        $nutriE = $this->input->post('nutriE');
+
+        //Ce qui concerne les additifs
+
+        //Ce qui concerne les ingrédients
+
+        //Ce qui concerne les valeurs nutritionnelles
+
+
+
+        $data['title'] = "resultat recherche";
+        $data['content'] = 'ok';
+
+        $this->load->vars($data);
+        $this->load->view('template');
     }
 
 }
