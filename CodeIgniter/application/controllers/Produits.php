@@ -251,14 +251,53 @@ class Produits extends CI_Controller {
 			}
 			$request = $request.") ";
 		}
-		
-		
+
         //Ce qui concerne les ingrédients
+        $ingredientString = $this->input->post('ingredient');
+		if(!empty($ingredientString)){
+		    $ingredientString = str_replace(' ', '', $ingredientString);
+		    $ingredients = explode(",", $ingredientString);
+		    if($argRank != 0){
+		        $request = $request." INTERSECT ";
+            }
+
+            $request = $request."((SELECT openfoodfacts._produit.id_produit, product_name, brands 
+                                    FROM openfoodfacts._produit INNER JOIN openfoodfacts._ingredienttexte
+                                    ON openfoodfacts._produit.id_produit = openfoodfacts._ingredienttexte.id_produit ";
+            $argRank = 1;
+            $subRankIng = 0;
+            foreach($ingredients as $ingredient){
+                if($subRankIng == 0){
+                    $request = $request."WHERE ";
+                }else{
+                    $request = $request."AND ";
+                }
+                $request = $request."UPPER(openfoodfacts._ingredienttexte.ingredient_text) LIKE UPPER('%$ingredient%') ";
+                $subRankIng = 1;
+            }
+            $request = $request.") UNION (SELECT openfoodfacts._produit.id_produit, product_name, brands 
+                                  FROM openfoodfacts._produit INNER JOIN openfoodfacts._ingredientduproduit 
+                                  ON openfoodfacts._produit.id_produit = openfoodfacts._ingredientduproduit.id_produit 
+                                  INNER JOIN openfoodfacts._ingredient
+                                  ON openfoodfacts._ingredient.id_ingredient = openfoodfacts._ingredientduproduit.id_ingredient ";
+            $subRankIng2 = 0;
+            foreach($ingredients as $ingredient) {
+                if ($subRankIng == 0) {
+                    $request = $request . "WHERE ";
+                } else {
+                    $request = $request . "OR ";
+                }
+                $request = $request . "UPPER(openfoodfacts._ingredient.ingredients_text) LIKE UPPER('%$ingredient%') ";
+                $subRankIng2 = 1;
+            }
+            $request = $request."))";
+        }
+
 
         //Ce qui concerne les valeurs nutritionnelles
 
 
-		print_r($additifs);
+
 
 		if(empty($request)){
 			redirect('/Produits/advancedResearch');
