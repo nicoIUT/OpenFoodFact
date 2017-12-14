@@ -89,7 +89,7 @@ class Produits extends CI_Controller {
         
 
         //Ce qui concerne le produit en lui même (caracteristiques)
-        $request = "SELECT id_produit, product_name, brands FROM openfoodfacts._produit ";
+        $request = "";
         
         
         $nom = $this->input->post('nom');
@@ -97,7 +97,19 @@ class Produits extends CI_Controller {
         $portion = $this->input->post('portion');
         $marque = $this->input->post('marque');
         
+        //Ce qui concerne le nutriscore
+        $nutriA = $this->input->post('nutriscoreA');
+        $nutriB = $this->input->post('nutriscoreB');
+        $nutriC = $this->input->post('nutriscoreC');
+        $nutriD = $this->input->post('nutriscoreD');
+        $nutriE = $this->input->post('nutriscoreE');
+        
         $argRank = 0;
+        
+        if((!empty($nom)) OR (!empty($code)) OR (!empty($portion)) OR (!empty($marque)) OR (!empty($nutriA)) OR (!empty($nutriB)) OR (!empty($nutriC)) OR (!empty($nutriD)) OR (!empty($nutriE))){
+			$request = $request."(SELECT id_produit, product_name, brands FROM openfoodfacts._produit ";
+		}
+        
         
         if(!empty($nom)){
 			if($argRank !=0){
@@ -136,12 +148,6 @@ class Produits extends CI_Controller {
 			$argRank = 1;
 		}
 
-        //Ce qui concerne le nutriscore
-        $nutriA = $this->input->post('nutriscoreA');
-        $nutriB = $this->input->post('nutriscoreB');
-        $nutriC = $this->input->post('nutriscoreC');
-        $nutriD = $this->input->post('nutriscoreD');
-        $nutriE = $this->input->post('nutriscoreE');
         
         if((!empty($nutriA)) OR (!empty($nutriB)) OR (!empty($nutriC)) OR (!empty($nutriD)) OR (!empty($nutriE))){
 			if($argRank == 0){
@@ -205,30 +211,69 @@ class Produits extends CI_Controller {
 		if($argSubRank == 1){
 			$request = $request." )";
 		}
-        
-
-        
-        
+        if($argRank == 1){
+			$request = $request." ) ";
+		}
+             
+        //Ce qui concerne le pays de commercialisation
+        $pays = $this->input->post('pays');
+        if(!empty($pays)){
+			if($argRank != 0){
+				 $request = $request." INTERSECT ";
+			}
+			$request = $request."(SELECT openfoodfacts._produit.id_produit, product_name, brands 
+									FROM openfoodfacts._produit INNER JOIN openfoodfacts._payscommercialiseproduit 
+									ON openfoodfacts._produit.id_produit = openfoodfacts._payscommercialiseproduit.id_produit 
+									WHERE openfoodfacts._payscommercialiseproduit.pays = '$pays')";
+			$argRank = 1;
+		}
 
         //Ce qui concerne les additifs
-
+		$additifs = $this->input->post('selectAdditif[]');
+		if(!empty($additifs)){
+			if($argRank !=0){
+				$request = $request." INTERSECT ";
+			}
+			$request = $request."(SELECT openfoodfacts._produit.id_produit, product_name, brands
+									FROM openfoodfacts._produit INNER JOIN openfoodfacts._additifcontenus
+									ON openfoodfacts._produit.id_produit = openfoodfacts._additifcontenus.id_produit ";
+										
+			$argRank = 1;	
+			$subRankAdd = 0;	
+			foreach($additifs as $additif){
+				if($subRankAdd == 0){
+					$request = $request."WHERE ";
+				}else{
+					$request = $request."OR ";
+				}
+				$request = $request."openfoodfacts._additifcontenus.id_additif = '$additif' ";
+				$subRankAdd = 1;
+			}
+			$request = $request.") ";
+		}
+		
+		
         //Ce qui concerne les ingrédients
 
         //Ce qui concerne les valeurs nutritionnelles
 
 
-		//$result = $this->Produit->advancedResearchQuery($request);
-		
-		
-		$data['result'] = $nutriA;
-		$data['test'] = $request;
-		$_SESSION['request'] = $request;
+		print_r($additifs);
 
-        $data['title'] = "resultat recherche";
-        $data['content'] = 'ok';
+		if(empty($request)){
+			redirect('/Produits/advancedResearch');
+		}else{
+			$result = $this->Produit->advancedResearchQuery($request);
+			$_SESSION['tmp'] = $result;
+		
+			$data['test'] = $request;
 
-        $this->load->vars($data);
-        $this->load->view('template');
+			$data['title'] = "resultat recherche TMP";
+			$data['content'] = 'ok';
+
+			$this->load->vars($data);
+			$this->load->view('template');
+		}
     }
 
 }
