@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <tr>
                 <th>Marque</th>
                 <td>
-                    <input list="listMarque" type="text" id="choixMarque">
+                    <input list="listMarque" type="text" id="choixMarque" name="marque">
                     <datalist id="listMarque">
                         <?php foreach ($marques as $marque) : ?>
                             <?php echo "<option value=".$marque['nom']."></option>"; ?>

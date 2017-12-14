@@ -26,7 +26,7 @@ CONSTRAINT _ingredientcontenus_fk2 FOREIGN KEY (id_ingredient_contenant) REFEREN
 
 INSERT INTO openfoodfacts._ingredient(ingredients_text) VALUES('pate'),('jambon'),('creme'),('farine'),('oeuf'),('lait'),('blé');
 
-INSERT INTO openfoodfacts._ingredientcontenusproduit VALUES(1,1),(1,2),(1,3);
+INSERT INTO openfoodfacts._ingredientcontenusproduit VALUES(18943,1),(18943,2),(18943,3);
 
 INSERT INTO openfoodfacts._ingredientcontenusingredient VALUES(1,4),(1,5),(3,6),(4,7);
 

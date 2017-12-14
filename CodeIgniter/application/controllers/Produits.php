@@ -86,20 +86,129 @@ class Produits extends CI_Controller {
     public function formAdvancedSearch(){
         $this->load->helper('form');
         $this->load->library('form_validation');
+        
 
         //Ce qui concerne le produit en lui même (caracteristiques)
+        $request = "SELECT id_produit, product_name, brands FROM openfoodfacts._produit ";
+        
+        
         $nom = $this->input->post('nom');
         $code = $this->input->post('code');
         $portion = $this->input->post('portion');
-        $pays =  $this->input->post('pays');
         $marque = $this->input->post('marque');
+        
+        $argRank = 0;
+        
+        if(!empty($nom)){
+			if($argRank !=0){
+				$request = $request."AND ";
+			}else{
+				$request = $request."WHERE ";
+			}
+			$request = $request."product_name = '$nom' ";
+			$argRank = 1;
+		}
+		if(!empty($code)){
+			if($argRank !=0){
+				$request = $request."AND ";
+			}else{
+				$request = $request."WHERE ";
+			}
+			$request = $request."id_produit = '$code' ";
+			$argRank = 1;
+		}
+		if(!empty($portion)){
+			if($argRank !=0){
+				$request = $request."AND ";
+			}else{
+				$request = $request."WHERE ";
+			}
+			$request = $request."serving_size = '$portion' ";
+			$argRank = 1;
+		}
+		if(!empty($marque)){
+			if($argRank !=0){
+				$request = $request."AND ";
+			}else{
+				$request = $request."WHERE ";
+			}
+			$request = $request."brands = '$marque' ";
+			$argRank = 1;
+		}
 
         //Ce qui concerne le nutriscore
-        $nutriA = $this->input->post('nutriA');
-        $nutriB = $this->input->post('nutriB');
-        $nutriC = $this->input->post('nutriC');
-        $nutriD = $this->input->post('nutriD');
-        $nutriE = $this->input->post('nutriE');
+        $nutriA = $this->input->post('nutriscoreA');
+        $nutriB = $this->input->post('nutriscoreB');
+        $nutriC = $this->input->post('nutriscoreC');
+        $nutriD = $this->input->post('nutriscoreD');
+        $nutriE = $this->input->post('nutriscoreE');
+        
+        if((!empty($nutriA)) OR (!empty($nutriB)) OR (!empty($nutriC)) OR (!empty($nutriD)) OR (!empty($nutriE))){
+			if($argRank == 0){
+				$request = $request."WHERE ";
+				$argRank = 1;
+			}else{
+				$request = $request."AND ";
+			}
+		}
+        
+        $argSubRank = 0;
+        if(!empty($nutriA)){
+			if($argSubRank == 0){
+				$request = $request."( ";
+				$argSubRank = 1;
+			}else{
+				$request = $request."OR ";
+			}
+			$request = $request."nutrition_grade_fr = '$nutriA' ";
+		}
+		if(!empty($nutriB)){
+				if($argSubRank == 0){
+					$request = $request."( ";
+					$argSubRank = 1;
+				}else{
+					$request = $request."OR ";
+				}
+			
+			$request = $request."nutrition_grade_fr = '$nutriB' ";
+		}
+		if(!empty($nutriC)){
+				if($argSubRank == 0){
+					$request = $request."( ";
+					$argSubRank = 1;
+				}else{
+					$request = $request."OR ";
+				}
+			
+			$request = $request."nutrition_grade_fr = '$nutriC' ";
+		}
+		if(!empty($nutriD)){
+				if($argSubRank == 0){
+					$request = $request."( ";
+					$argSubRank = 1;
+				}else{
+					$request = $request."OR ";
+				}
+			
+			$request = $request."nutrition_grade_fr = '$nutriD' ";
+		}
+		if(!empty($nutriE)){
+				if($argSubRank == 0){
+					$request = $request."( ";
+					$argSubRank = 1;
+				}else{
+					$request = $request."OR ";
+				}
+			
+			$request = $request."nutrition_grade_fr = '$nutriE' ";
+		}
+		if($argSubRank == 1){
+			$request = $request." )";
+		}
+        
+
+        
+        
 
         //Ce qui concerne les additifs
 
@@ -108,6 +217,12 @@ class Produits extends CI_Controller {
         //Ce qui concerne les valeurs nutritionnelles
 
 
+		//$result = $this->Produit->advancedResearchQuery($request);
+		
+		
+		$data['result'] = $nutriA;
+		$data['test'] = $request;
+		$_SESSION['request'] = $request;
 
         $data['title'] = "resultat recherche";
         $data['content'] = 'ok';

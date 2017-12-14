@@ -10,7 +10,12 @@ $liste2[] = 1;
 $liste2[] = 4;
 $liste2[] = 8;
 
-$result = array_intersect($liste, $liste2);
+$result1 = array_intersect($liste, $liste2);
 
-print_r($result);
+//print_r($result1);
+
+echo "</br></br>".$result."</br></br>";
+
+echo "</br></br>".$test."</br></br>";
+//print_r($result);
 ?>
