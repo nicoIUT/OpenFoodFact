@@ -10,6 +10,7 @@ $this->load->helper('url');
     <head>
         <title><?php echo $title; ?></title>
         <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
+        <link href="<?php echo base_url('assets/icon/fontawesome-all.css'); ?>" rel="stylesheet">
     </head>
 
     <body>
@@ -20,6 +21,10 @@ $this->load->helper('url');
         <div class="container">
             <?php $this->load->view($content); ?>
         </div>
+		
+		<script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/popper.js') ?>"></script>
+        <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
 
         <script>
             document.getElementById('btnAjoutAdditif').addEventListener('click', ajouterAdditif);
@@ -42,6 +47,10 @@ $this->load->helper('url');
             function supprimerLigne(id){
                 document.getElementById(id).remove();
             }
+            
+            $(function () {
+				$('[data-toggle="tooltip"]').tooltip()
+			})
         </script>
 
     </body>

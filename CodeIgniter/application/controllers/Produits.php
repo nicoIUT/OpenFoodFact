@@ -270,7 +270,7 @@ class Produits extends CI_Controller {
                 if($subRankIng == 0){
                     $request = $request."WHERE ";
                 }else{
-                    $request = $request."AND ";
+                    $request = $request."OR ";
                 }
                 $request = $request."UPPER(openfoodfacts._ingredienttexte.ingredient_text) LIKE UPPER('%$ingredient%') ";
                 $subRankIng = 1;

@@ -10,6 +10,7 @@ $this->load->helper('url');
     <head>
         <title><?php echo $title; ?></title>
         <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
+        <link href="<?php echo base_url('assets/icon/fontawessom-all.css'); ?>" rel="stylesheet">
     </head>
 
     <body>
@@ -28,5 +29,13 @@ $this->load->helper('url');
         <div class="container">
             <?php $this->load->view($content); ?>
         </div>
+        <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/popper.js') ?>"></script>
+        <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
+        <script>
+			$(function () {
+				$('[data-toggle="tooltip"]').tooltip()
+			})
+		</script>
     </body>
 </html>

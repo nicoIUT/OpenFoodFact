@@ -81,11 +81,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </table>
         </label>
 
-        <h2>Additifs</h2>
+        <h2>Additifs<i class="fas fa-info-circle float-right" data-toggle="tooltip" data-placement="right" title="Dans le cas d'une recherche multiple, les produits retournés @TODO"></i></h2>
         <table id="tableAdditif" class="table table-sm">
             <tr>
                 <th>Code</th>
-                <th>Nom</th>
+                <th></th>
             </tr>
             <tr>
                 <td>
@@ -103,7 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         </table>
 
-        <h2>Ingredients</h2>
+        <h2>Ingredients<i class="fas fa-info-circle float-right" data-toggle="tooltip" data-placement="right" title="Dans le cas d'une recherche multiple, les produits retournés @TODO"></i></h2>
         <input type="text" name="ingredient">
         <p>Entrez les ingredients séparés par des virgules</p>
     </div>
