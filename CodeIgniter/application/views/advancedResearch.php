@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <input list="listMarque" type="text" id="choixMarque" name="marque">
                     <datalist id="listMarque">
                         <?php foreach ($marques as $marque) : ?>
-                            <?php echo "<option value=".$marque['nom']."></option>"; ?>
+                            <?php echo "<option value=\"".$marque['nom']."\"></option>"; ?>
                         <?php endforeach; ?>
                     </datalist>
                 </td>
@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </table>
         </label>
 
-        <h2>Additifs<i class="fas fa-info-circle float-right" data-toggle="tooltip" data-placement="right" title="Dans le cas d'une recherche multiple, les produits retournés @TODO"></i></h2>
+        <h2>Additifs<i class="fas fa-info-circle float-right" data-toggle="tooltip" data-placement="right" title="Dans le cas d'une recherche multiple, les produits retournés sont ceux contenant au moins un des additifs"></i></h2>
         <table id="tableAdditif" class="table table-sm">
             <tr>
                 <th>Code</th>
@@ -103,7 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         </table>
 
-        <h2>Ingredients<i class="fas fa-info-circle float-right" data-toggle="tooltip" data-placement="right" title="Dans le cas d'une recherche multiple, les produits retournés @TODO"></i></h2>
+        <h2>Ingredients<i class="fas fa-info-circle float-right" data-toggle="tooltip" data-placement="right" title="Dans le cas d'une recherche multiple, les produits retournés sont ceux contenant au moins un des ingrédients"></i></h2>
         <input type="text" name="ingredient">
         <p>Entrez les ingredients séparés par des virgules</p>
     </div>

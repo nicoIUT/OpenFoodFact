@@ -12,10 +12,10 @@ class  Produit  extends  CI_Model
 		if(array_key_exists($id, $ingredientCollector)){
 			return;
 		}
-		$list_ing = $this->db->query("SELECT * 
-                                    FROM openfoodfacts._ingredientcontenusingredient 
-                                    INNER JOIN openfoodfacts._ingredient 
-                                    ON openfoodfacts._ingredientcontenusingredient.id_ingredient_contenu = openfoodfacts._ingredient.id_ingredient 
+		$list_ing = $this->db->query("SELECT *
+                                    FROM openfoodfacts._ingredientcontenusingredient
+                                    INNER JOIN openfoodfacts._ingredient
+                                    ON openfoodfacts._ingredientcontenusingredient.id_ingredient_contenu = openfoodfacts._ingredient.id_ingredient
                                     WHERE id_ingredient_contenant = '$id'")->result_array();
 		if(!empty($list_ing)){
 			foreach($list_ing as $ing){
@@ -48,8 +48,8 @@ class  Produit  extends  CI_Model
 		$result['additif'] = $list_add;
 
 		//Pays dans lesquels sont commercialisé l'ingredient
-        $result['pays'] = $this->db->query("SELECT pays 
-                                          FROM openfoodfacts._produit INNER JOIN openfoodfacts._payscommercialiseproduit 
+        $result['pays'] = $this->db->query("SELECT pays
+                                          FROM openfoodfacts._produit INNER JOIN openfoodfacts._payscommercialiseproduit
                                           ON openfoodfacts._produit.id_produit = openfoodfacts._payscommercialiseproduit.id_produit
                                           WHERE openfoodfacts._payscommercialiseproduit.id_produit = $id")->result_array();
 
@@ -64,9 +64,9 @@ class  Produit  extends  CI_Model
 		//Ingredients contenus dans le produit
 		$result['ingredient'] = array();
 		$list_ing = array();
-		$list_ing = $this->db->query("SELECT openfoodfacts._ingredientcontenusproduit.id_ingredient, ingredients_text 
-                                    FROM openfoodfacts._ingredientcontenusproduit 
-                                    INNER JOIN openfoodfacts._ingredient 
+		$list_ing = $this->db->query("SELECT openfoodfacts._ingredientcontenusproduit.id_ingredient, ingredients_text
+                                    FROM openfoodfacts._ingredientcontenusproduit
+                                    INNER JOIN openfoodfacts._ingredient
                                     ON openfoodfacts._ingredientcontenusproduit.id_ingredient = openfoodfacts._ingredient.id_ingredient
                                     WHERE id_produit = $id")->result_array();
 		if(!empty($list_ing)){
@@ -90,7 +90,7 @@ class  Produit  extends  CI_Model
 												INNER JOIN openfoodfacts._contributeur
 												ON openfoodfacts._produit.id_produit = openfoodfacts._contributeur.id_compte
 												WHERE openfoodfacts._produit.id_produit = $id")->row_array();
-	
+
 
 
         return $result;
@@ -105,13 +105,13 @@ class  Produit  extends  CI_Model
 	    $result = array();
 
 	    //$result['list'] renvoie une partie de la base ($nbproduit)
-	    $result['list'] = $this->db->query("SELECT id_produit, product_name, brands 
+	    $result['list'] = $this->db->query("SELECT id_produit, product_name, brands
 	                            FROM openfoodfacts._produit
-	                            WHERE UPPER(product_name) LIKE UPPER('%$productName%') 
+	                            WHERE UPPER(product_name) LIKE UPPER('%$productName%')
 	                            LIMIT $nbProduct OFFSET $page*$nbProduct")->result_array();
 
 	    //$result['count'] est le nombre de produit total de la base
-	    $result['count'] = $this->db->query("SELECT count(*) count 
+	    $result['count'] = $this->db->query("SELECT count(*) count
                                             FROM openfoodfacts._produit
                                             WHERE UPPER(product_name) LIKE UPPER('%$productName%')")->row_array();
 
@@ -127,7 +127,21 @@ class  Produit  extends  CI_Model
     }
 
     public function advancedResearchQuery($request){
-		return $this->db->query("$request")->result_array();
-    }
+		return $this->db->query($request)->result_array();
+	}
+
+	public function getSearchList($page, $nbProduct){
+		$result = array();
+
+		$result['list'] = $this->db->query("WITH fullRequest AS ".($_SESSION['searchRequest'])."
+											SELECT * FROM fullRequest
+											LIMIT $nbProduct OFFSET $page*$nbProduct")->result_array();
+
+		$result['count'] = $this->db->query("WITH fullRequest AS ".($_SESSION['searchRequest'])."
+											SELECT count(*) count
+											FROM fullRequest ")->row_array();
+
+		return $result;
+	}
 
 }

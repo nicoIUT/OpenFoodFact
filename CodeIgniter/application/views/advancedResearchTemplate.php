@@ -16,12 +16,15 @@ $this->load->helper('url');
     <body>
         <nav class="navbar bg-light">
             <a class="navbar-brand" href='<?php echo base_url()."index.php/Produits/listProduct/" ?>'>OpenFoodFacts</a>
+            <?php if(isset($_SESSION['searchRequest'])) : ?>
+                <a href="<?php echo site_url().'/Produits/resetSearch'?>"><button type='button' class= 'btn btn-primary'  value="Supprimer les filtres de recherches">Supprimer les filtres de recherche</button></a>
+            <?php endif; ?>
         </nav>
 
         <div class="container">
             <?php $this->load->view($content); ?>
         </div>
-		
+
 		<script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/popper.js') ?>"></script>
         <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
@@ -47,7 +50,7 @@ $this->load->helper('url');
             function supprimerLigne(id){
                 document.getElementById(id).remove();
             }
-            
+
             $(function () {
 				$('[data-toggle="tooltip"]').tooltip()
 			})
