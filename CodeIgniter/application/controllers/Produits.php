@@ -52,6 +52,7 @@ class Produits extends CI_Controller {
 				$data['nbPage'] = $this->nbPage($data['product']['count']['count'], $nbProduct);
 				$data['currentPage'] = $page;
 				$data['currentNbProduct'] = $nbProduct;
+                $data['search'] = $search;
 				$this->load->vars($data);
 				$this->load->view('advancedResearchTemplate');
 			}else{
@@ -676,13 +677,14 @@ class Produits extends CI_Controller {
 
 
 
+        $this->form_validation->set_rules('code','code','required');
 
 
 		if(empty($request)){
 			redirect('/Produits/advancedResearch');
-		}else{
-			$_SESSION['searchRequest'] = $request;
-			redirect('/Produits/listProduct');
+        }else {
+            $_SESSION['searchRequest'] = $request;
+            redirect('/Produits/listProduct');
 		}
 	}
 

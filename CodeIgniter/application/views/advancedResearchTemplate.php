@@ -11,6 +11,13 @@ $this->load->helper('url');
         <title><?php echo $title; ?></title>
         <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/icon/fontawesome-all.css'); ?>" rel="stylesheet">
+        <style>
+            #background {
+                height: 150px;
+                background-image:url(<?php echo base_url()."assets/image/background/".rand(1,9).".jpg" ?>);
+                background-size: cover;
+            }
+        </style>
     </head>
 
     <body>
@@ -20,6 +27,8 @@ $this->load->helper('url');
                 <a href="<?php echo site_url().'/Produits/resetSearch'?>"><button type='button' class= 'btn btn-primary'  value="Supprimer les filtres de recherches">Supprimer les filtres de recherche</button></a>
             <?php endif; ?>
         </nav>
+
+        <div id="background"></div>
 
         <div class="container">
             <?php $this->load->view($content); ?>

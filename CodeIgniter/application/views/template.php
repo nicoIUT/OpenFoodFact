@@ -5,12 +5,20 @@ $this->load->helper('form');
 $this->load->helper('url');
 ?>
 
+
 <!DOCTYPE html>
 <html>
     <head>
         <title><?php echo $title; ?></title>
         <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/icon/fontawessom-all.css'); ?>" rel="stylesheet">
+        <style>
+            #background {
+                height: 150px;
+                background-image:url(<?php echo base_url()."assets/image/background/".rand(1,9).".jpg" ?>);
+                background-size: cover;
+            }
+        </style>
     </head>
 
     <body>
@@ -21,10 +29,9 @@ $this->load->helper('url');
             <button type='submit' class='btn btn-primary'  value="Rechercher">Rechercher</button>
             <a href="<?php echo site_url().'/Produits/advancedResearch'?>"><button type='button' class= 'btn btn-primary'  value="Recherche avancée...">Recherche avancée...</button></a>
             </form>
-
-
-
         </nav>
+
+        <div id="background"></div>
 
         <div class="container">
             <?php $this->load->view($content); ?>
