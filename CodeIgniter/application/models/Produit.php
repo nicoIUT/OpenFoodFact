@@ -133,11 +133,12 @@ class  Produit  extends  CI_Model
 	public function getSearchList($page, $nbProduct){
 		$result = array();
 
-		$result['list'] = $this->db->query("WITH fullRequest AS ".($_SESSION['searchRequest'])."
+		$result['list'] = $this->db->query("WITH fullRequest AS (".($_SESSION['searchRequest']).")
 											SELECT * FROM fullRequest
+											ORDER BY id_produit
 											LIMIT $nbProduct OFFSET $page*$nbProduct")->result_array();
 
-		$result['count'] = $this->db->query("WITH fullRequest AS ".($_SESSION['searchRequest'])."
+		$result['count'] = $this->db->query("WITH fullRequest AS (".($_SESSION['searchRequest']).")
 											SELECT count(*) count
 											FROM fullRequest ")->row_array();
 
