@@ -28,6 +28,8 @@ $this->load->helper('url');
             <input type="text" name="nameProduct" placeholder="Recherche par nom">
             <button type='submit' class='btn btn-primary'  value="Rechercher">Rechercher</button>
             <a href="<?php echo site_url().'/Produits/advancedResearch'?>"><button type='button' class= 'btn btn-primary'  value="Recherche avancée...">Recherche avancée...</button></a>
+             <a href="<?php echo site_url().'/Produits2/createProduct'?>"><button type='button' class= 'btn btn-primary'  value="Créer un produit...">Créer un produit...</button></a>
+            
             </form>
         </nav>
 

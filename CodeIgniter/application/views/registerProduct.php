@@ -1,25 +1,30 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$this->load->helper('form');
+$this->load->helper('url');
 ?>
 
 
+<h1 class="display-3 mb-5">Création de produit </h1>
+<?php echo form_open('Produits2/formAdvancedSearch'); ?>
 <div class="row">
 	<div class="col">
-		
+	
 		<h2>Caracteristiques</h2>
 		<table class="table table-sm">
 			<tr>
 				<th>nom</th>
 				<td><td><input type="text" name="nom"></td></td>
 			</tr>
+			<tr>
 				<th>Marque</th>
 				<td><td><input type="text" name="marque"></td></td>
 			</tr>
 			
 			<tr>
 				<th>Pays</th>
-				<td><input type="text" name="pays"></td>
+				<td><td><input type="text" name="pays"></td></td>
 			</tr>
 		</table>
 
@@ -28,19 +33,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <table class="table">
                 <tr>
                     <td>
-                        <input type="checkbox" name="nutriscoreA" value="a">
+                        <input <?php if (isset($nutriscoreA) && $nutriscoreB=="a") echo "checked";?> type="radio" name="nutriscoreA" value="a">
                     </td>
                     <td>
-                        <input type="checkbox" name="nutriscoreB" value="b">
+					<!- changer en radio button >
+                        <input  <?php if (isset($nutriscoreB) && $nutriscoreB=="b") echo "checked";?>type="radio" name="nutriscoreB" value="b">
                     </td>
                     <td>
-                        <input type="checkbox"  name="nutriscoreC" value="c">
+                        <input  <?php if (isset($nutriscoreC) && $nutriscoreB=="c") echo "checked";?> type="radio"  name="nutriscoreC" value="c">
                     </td>
                     <td>
-                        <input type="checkbox" name="nutriscoreD" value="d">
+                        <input  <?php if (isset($nutriscoreD) && $nutriscoreB=="d") echo "checked";?>type="radio" name="nutriscoreD" value="d">
                     </td>
                     <td>
-                        <input type="checkbox" name="nutriscoreE" value="e">
+                        <input  <?php if (isset($nutriscoreE) && $nutriscoreB=="e") echo "checked";?>type="radio" name="nutriscoreE" value="e">
                     </td>
                 </tr>
                 <tr>
@@ -103,77 +109,71 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 	</div>
 	<div class="col">
+	
+         <table class="table">
 		<h2>Nutrition</h2>
-		
+			<h4>Valeur moyenne pour 100</h4>
 			<tr>
-				<th>Valeur moyenne pour</th>
-				<th>100g</th>
+				<th>Energie</th>
+				<td><td><input type="number" name="energie"></td></td>
+				<th>(en KJ ) </th>
 			</tr>
-			<tr>
-				<td>Energie</td>
-				<td><input type="number" name="energie"></td>
+           
+				<th>Graisse	</th>
+				<td><td><input type="number" name="graisse"></td></td>
 			</tr>
-            <tr>
-				<td>Graisse</td>
-				<td><input type="number" name="graisse"></td>
+            	
+				<th>Graisse saturée	</th>
+				<td><td><input type="number" name="graisseSaturee"></td></td>
 			</tr>
-            <tr>	
-				<td>Graisse saturée</td>
-				<td><input type="number" name="graisseSaturee"></td>
-			</tr>
-            <tr>	
-				<td>Graisse trans</td>
-				<td><input type="number" name="graisseTrans"></td>
+            	
+				<th>Graisse trans</th>
+				<td><td>	<input type="number" name="graisseTrans"></td></td>
 			</tr>
             <tr>	
-				<td>Cholesterol</td>
-				<td><input type="number" name="cholesterol"></td>
+				<th>Cholesterol	</th>
+				<td><td><input type="number" name="cholesterol"></td></td></br>
 			</tr>
             <tr>	
-				<td>Carbohydrates</td>
-				<td><input type="number" name="carbohydrates"></td>
+				<<th>Carbohydrates	</th>
+				<td><td><input type="number" name="carbohydrates"></td></td>
 			</tr>
             <tr>	
-				<td>Sucres</td>
-				<td><input type="number" name="sucre"></td>
+				<th>Sucres	</th>
+				<td><td><input type="number" name="sucre"></td></td>
 			</tr>
             <tr>	
-				<td>Fibres</td>
-				<td><input type="number" name="fibre"></td>
+				<th>Fibres	</th>
+				<td><td><input type="number" name="fibre"></td></td>
 			</tr>
             <tr>	
-				<td>Protéines</td>
-				<td><input type="number" name="proteine"></td>
+				<th>Protéines	</th>
+				<td><td><input type="number" name="proteine"></td></td>
 			</tr>
             <tr>	
-				<td>Sel</td>
-				<td><input type="number" name="sel"></td>
+				<th>Sel	</th>
+				<td><td><input type="number" name="sel"></td></td>
 			</tr>
             <tr>	
-				<td>Sodium</td>
-				<td><input type="number" name="sodium"></td>
+				<th>Sodium	</th>
+				<td><td><input type="number" name="sodium"></td></td>
 			</tr>
             <tr>	
-				<td>Vitamine A</td>
-				<td><input type="number" name="vitamineA"></td>
+				<th>Vitamine A	</th>
+				<td><td><input type="number" name="vitamineA"></td></td>
 			</tr>
             <tr>	
-				<td>Vitamine C</td>
-                <td><input type="number" name="vitamineC"></td>
+				<th>Vitamine C	</th>
+				<td><td><input type="number" name="vitamineC"></td></td>
 			</tr>
             <tr>	
-				<td>Calcium</td>
-                <td><input type="number" name="calcium"></td>
+				<th>Calcium	</th>
+				<td><td><input type="number" name="calcium"></td></td>
 			</tr>
             <tr>	
-				<td>Fer</td>
-                <td><input type="number" name="fer"></td>
-			</tr>
-            <tr>	
-				<td>Score nutritif</td>
-				<td><input type="number" name="scoreNutritif"></td>
-                
-			</tr>
+				<th>Fer	</th>
+				<td><td><input type="number" name="fer"></td></td>
+			</tr>   
 		</table>
 	</div>
 </div>
@@ -189,3 +189,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </table>
 
+</form>
