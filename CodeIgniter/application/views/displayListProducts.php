@@ -2,8 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-
-<h1 class="display-3 mb-5">Liste des produits</h1>
+<?php if(!isset($_SESSION['searchRequest'])) :?>
+	<h1 class="display-3 mb-5">Liste des produits</h1>
+<?php else : ?>
+	<h1 class="display-3 mb-5">Resultat de la recherche</h1>
+	<h3>(<?php echo $product['count']['count'] ?> Produits)</h3>
+<?php endif; ?>
 
 <!--Boutons de nombre de produit / page-->
 <p style="text-align: right;">
