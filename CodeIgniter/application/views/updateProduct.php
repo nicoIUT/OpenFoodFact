@@ -172,7 +172,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </tr>
             <tr>
                 <td>Score nutritif</td>
-                <td><input type="number" name="scoreNutritif" value="<?php echo $product['product']['nutrition_score_fr+_100g'] ?>"></td>
+                <td><input type="number" name="scoreNutritif" value="<?php echo $product['product']['nutrition_score_fr_100g'] ?>"></td>
                 <td>g</td>
             </tr>
         </table>
