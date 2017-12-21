@@ -693,6 +693,19 @@ class Produits extends CI_Controller {
 		redirect('/Produits/listProduct');
 	}
 
+	public function updateProduct(){
+        $data['title'] = "Modification";
+        $data['content'] = 'updateProduct';
+
+
+        $this->load->vars($data);
+        $this->load->view('template');
+    }
+
+    public function formUpdateProduct(){
+
+    }
+
 }
 
 

@@ -24,6 +24,7 @@ function ingredientTree($ingredient, $tree){
 ?>
 
 <h1 class="display-3 mb-5"><?php echo $product['product']['product_name']?></h1>
+<a href="#"><button type='button' class= 'btn btn-primary'  value="Modifier le produit">Modifier le produit</button></a>
 
 <div class="row">
 	<div class="col">
