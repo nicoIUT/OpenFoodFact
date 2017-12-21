@@ -11,16 +11,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <table>
             <tr>
                 <th>Nom</th>
-                <td><input type="text" name="nom"></td>
+                <td><input type="text" name="nom" value="<?php echo $product['product']['product_name'] ?>"></td>
             </tr>
             <tr>
                 <th>Code</th>
-                <td><input type="number" name="code" value="42222" disabled></td>
+                <td><input type="number" name="code" value="<?php echo $product['product']['id_produit'] ?>" disabled></td>
             </tr>
             <tr>
                 <th>Marque</th>
                 <td>
-                    <input list="listMarque" type="text" id="choixMarque" name="marque">
+                    <input list="listMarque" type="text" id="choixMarque" name="marque" value="<?php echo $product['product']['brands'] ?>">
                     <datalist id="listMarque">
                         <?php foreach ($marques as $marque) : ?>
                             <?php echo "<option value=\"".$marque['nom']."\"></option>"; ?>
@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </tr>
             <tr>
                 <th>Portion</th>
-                <td><input type="text" name="portion"></td>
+                <td><input type="text" name="portion" value="<?php echo $product['product']['serving_size'] ?>"></td>
             </tr>
             <tr>
                 <th>Pays</th>
@@ -42,19 +42,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <table class="table">
                 <tr>
                     <td>
-                        <input type="radio" name="nutriscore" value="a">
+                        <input type="radio" name="nutriscore" value="a" <?php if($product['product']['nutrition_grade_fr'] == 'a'){echo "checked";}?> >
                     </td>
                     <td>
-                        <input type="radio" name="nutriscore" value="b">
+                        <input type="radio" name="nutriscore" value="b" <?php if($product['product']['nutrition_grade_fr'] == 'b'){echo "checked";}?>>
                     </td>
                     <td>
-                        <input type="radio"  name="nutriscore" value="c">
+                        <input type="radio" name="nutriscore" value="c" <?php if($product['product']['nutrition_grade_fr'] == 'c'){echo "checked";}?>>
                     </td>
                     <td>
-                        <input type="radio" name="nutriscore" value="d">
+                        <input type="radio" name="nutriscore" value="d" <?php if($product['product']['nutrition_grade_fr'] == 'd'){echo "checked";}?>>
                     </td>
                     <td>
-                        <input type="radio" name="nutriscore" value="e">
+                        <input type="radio" name="nutriscore" value="e" <?php if($product['product']['nutrition_grade_fr'] == 'e'){echo "checked";}?>>
                     </td>
                     <td>
                         <input type="radio" name="nutriscore" value="f">
@@ -97,82 +97,82 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </tr>
             <tr>
                 <td>Energie</td>
-                <td><input type="number" name="energie"></td>
+                <td><input type="number" name="energie" value="<?php echo $product['product']['energy_100g'] ?>"></td>
                 <td>kj</td>
             </tr>
             <tr>
                 <td>Graisse</td>
-                <td><input type="number" name="graisse"></td>
+                <td><input type="number" name="graisse" value="<?php echo $product['product']['fat_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Graisse saturée</td>
-                <td><input type="number" name="graisseSaturee"></td>
+                <td><input type="number" name="graisseSaturee" value="<?php echo $product['product']['satured_fat_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Graisse trans</td>
-                <td><input type="number" name="graisseTrans"></td>
+                <td><input type="number" name="graisseTrans" value="<?php echo $product['product']['trans_fat_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Cholesterol</td>
-                <td><input type="number" name="cholesterol"></td>
+                <td><input type="number" name="cholesterol" value="<?php echo $product['product']['cholesterol_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Carbohydrates</td>
-                <td><input type="number" name="carbohydrates"></td>
+                <td><input type="number" name="carbohydrates" value="<?php echo $product['product']['carbohydrates_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Sucres</td>
-                <td><input type="number" name="sucre"></td>
+                <td><input type="number" name="sucre" value="<?php echo $product['product']['sugars_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Fibres</td>
-                <td><input type="number" name="fibre"></td>
+                <td><input type="number" name="fibre" value="<?php echo $product['product']['fibers_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Protéines</td>
-                <td><input type="number" name="proteine"></td>
+                <td><input type="number" name="proteine" value="<?php echo $product['product']['proteins_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Sel</td>
-                <td><input type="number" name="sel"></td>
+                <td><input type="number" name="sel" value="<?php echo $product['product']['salt_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Sodium</td>
-                <td><input type="number" name="sodium"></td>
+                <td><input type="number" name="sodium" value="<?php echo $product['product']['sodium_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Vitamine A</td>
-                <td><input type="number" name="vitamineA"></td>
+                <td><input type="number" name="vitamineA" value="<?php echo $product['product']['vitamin_a_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Vitamine C</td>
-                <td><input type="number" name="vitamineC"></td>
+                <td><input type="number" name="vitamineC" value="<?php echo $product['product']['vitamin_c_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Calcium</td>
-                <td><input type="number" name="calcium"></td>
+                <td><input type="number" name="calcium" value="<?php echo $product['product']['calcium_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Fer</td>
-                <td><input type="number" name="fer"></td>
+                <td><input type="number" name="fer" value="<?php echo $product['product']['iron_100g'] ?>"></td>
                 <td>g</td>
             </tr>
             <tr>
                 <td>Score nutritif</td>
-                <td><input type="number" name="scoreNutritif"></td>
+                <td><input type="number" name="scoreNutritif" value="<?php echo $product['product']['nutrition_score_fr+_100g'] ?>"></td>
                 <td>g</td>
             </tr>
         </table>
