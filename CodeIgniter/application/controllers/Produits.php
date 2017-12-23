@@ -707,7 +707,98 @@ class Produits extends CI_Controller {
     }
 
     public function formUpdateProduct(){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
 
+
+        $code = $this->input->post('code');
+
+        $request = "";
+
+        $nom = $this->input->post('nom');
+        $portion = $this->input->post('portion');
+        $marque = $this->input->post('marque');
+
+        $nutriscore = $this->input->post('nutriscore');
+
+
+        //concerne les nutriments
+        $energie = $this->input->post('energie');
+        $energie = $this->_nutriFormat($energie);
+        $graisse = $this->input->post('graisse');
+        $graisse = $this->_nutriFormat($graisse);
+        $graisseSaturee = $this->input->post('graisseSaturee');
+        $graisseSaturee = $this->_nutriFormat($graisseSaturee);
+        $graisseTrans = $this->input->post('graisseTrans');
+        $graisseTrans = $this->_nutriFormat($graisseTrans);
+        $cholesterol = $this->input->post('cholesterol');
+        $cholesterol = $this->_nutriFormat($cholesterol);
+        $carbohydrates = $this->input->post('carbohydrates');
+        $carbohydrates = $this->_nutriFormat($carbohydrates);
+        $sucre = $this->input->post('sucre');
+        $sucre = $this->_nutriFormat($sucre);
+        $fibre = $this->input->post('fibre');
+        $fibre = $this->_nutriFormat($fibre);
+        $proteine = $this->input->post('proteine');
+        $proteine = $this->_nutriFormat($proteine);
+        $sel = $this->input->post('sel');
+        $sel = $this->_nutriFormat($sel);
+        $sodium = $this->input->post('sodium');
+        $sodium = $this->_nutriFormat($sodium);
+        $vitamineA = $this->input->post('vitamineA');
+        $vitamineA = $this->_nutriFormat($vitamineA);
+        $vitamineC = $this->input->post('vitamineC');
+        $vitamineC = $this->_nutriFormat($vitamineC);
+        $calcium = $this->input->post('calcium');
+        $calcium = $this->_nutriFormat($calcium);
+        $fer = $this->input->post('fer');
+        $fer = $this->_nutriFormat($fer);
+        $scoreNutritif = $this->input->post('scoreNutritif');
+        $scoreNutritif = $this->_nutriFormat($scoreNutritif);
+
+        $additifs = $this->input->post('selectAdditif[]');
+        $this->Produit->resetAdd($code);
+        if(!empty($additifs)){
+            foreach($additifs as $additif){
+                $this->Produit->addAdd($code, $additif);
+            }
+        }
+
+
+       $request ="UPDATE openfoodfacts._produit 
+                  SET last_modified_t = now(), 
+                  product_name = '$nom', 
+                  serving_size = '$portion', 
+                  brands = '$marque',
+                  nutrition_grade_fr = '$nutriscore',
+                  energy_100g = $energie,
+                  fat_100g = $graisse,
+                  satured_fat_100g = $graisseSaturee,
+                  trans_fat_100g = $graisseTrans,
+                  cholesterol_100g = $cholesterol,
+                  carbohydrates_100g = $carbohydrates,
+                  sugars_100g = $sucre,
+                  fibers_100g = $fibre,
+                  proteins_100g = $proteine,
+                  salt_100g = $sel,
+                  sodium_100g = $sodium,
+                  vitamin_a_100g = $vitamineA,
+                  vitamin_c_100g = $vitamineC,
+                  calcium_100g = $calcium,
+                  iron_100g = $fer,
+                  nutrition_score_fr_100g = $scoreNutritif
+                  WHERE id_produit = $code";
+
+        $this->Produit-> updateProduct($request);
+
+        redirect("Produits/display/".$code);
+    }
+
+    public function _nutriFormat($nut){
+        if($nut == ''){
+            $nut = 'null';
+        }
+        return $nut;
     }
 
 }

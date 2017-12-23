@@ -18,7 +18,8 @@ $this->load->helper('url');
             </tr>
             <tr>
                 <th>Code</th>
-                <td><input type="number" name="code" value="<?php echo $product['product']['id_produit'] ?>" disabled></td>
+                <td><input type="number" name="coded" value="<?php echo $product['product']['id_produit'] ?>"  disabled  ></td>
+                <input type="hidden" name="code" value="<?php echo $product['product']['id_produit'] ?>"
             </tr>
             <tr>
                 <th>Marque</th>
@@ -96,7 +97,7 @@ $this->load->helper('url');
                     <input list="listAdditif" type="text" id="choixAdditif">
                     <datalist id="listAdditif">
                         <?php foreach ($additifs as $additif) : ?>
-                            <?php echo "<option value=".$additif['id_additif'].">".$additif['nom']."</option>"; ?>
+                            <?php echo "<option id=c".$additif['id_additif']." value=".$additif['id_additif'].">".$additif['nom']."</option>"; ?>
                         <?php endforeach; ?>
                     </datalist>
                 </td>
@@ -114,7 +115,30 @@ $this->load->helper('url');
 
         </table>
         <h2>Ingredients</h2>
-        <p>//TODO ca aussi c'est tendu car y'a de l'affichage recursif a gerer .... mais avec un peu de JS ca doit etre faisable</p>
+        <table class="table table-sm">
+            <tr>
+                <th>Ajouter</th>
+                <th></th>
+                <th><button type="button" class="btn btn-primary">+</button></th>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><button type="button" class="btn btn-primary">-</button></td>
+                <td><button type="button" class="btn btn-primary">+</button></td>
+            </tr>
+            <tr>
+                <td>&nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <input type="text"></td>
+                <td><button type="button" class="btn btn-primary">-</button></td>
+                <td><button type="button" class="btn btn-primary">+</button></td>
+            </tr>
+            <tr>
+                <td>Ceci est un prototype</td>
+            </tr>
+        </table>
     </div>
     <div class="col">
         <h2>Nutrition</h2>
@@ -219,7 +243,7 @@ $this->load->helper('url');
 
     function ajouterAdditif(event) {
         var additifsInput = document.getElementById('choixAdditif');
-        if ((document.getElementById(additifsInput.value))===null) {
+        if ((document.getElementById(additifsInput.value))===null && (document.getElementById('c'+additifsInput.value))!== null) {
             var additifActuel = additifsInput.value;
             var additifsTable = document.getElementById('tableAdditif');
             var tr = document.createElement('tr');

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-if(empty($product['product']['product_name'])){
+if(empty($product['product']['id_produit'])){
     show_404();
 }
 

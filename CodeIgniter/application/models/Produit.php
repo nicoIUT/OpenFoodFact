@@ -108,6 +108,7 @@ class  Produit  extends  CI_Model
 	    $result['list'] = $this->db->query("SELECT id_produit, product_name, brands
 	                            FROM openfoodfacts._produit
 	                            WHERE UPPER(product_name) LIKE UPPER('%$productName%')
+	                            ORDER BY id_produit 
 	                            LIMIT $nbProduct OFFSET $page*$nbProduct")->result_array();
 
 	    //$result['count'] est le nombre de produit total de la base
@@ -144,5 +145,17 @@ class  Produit  extends  CI_Model
 
 		return $result;
 	}
+
+	public function updateProduct($request){
+        return $this->db->query($request);
+    }
+
+    public function resetAdd($id){
+        $this->db->query("DELETE FROM openfoodfacts._additifcontenus WHERE id_produit = $id");
+    }
+
+    public function addAdd($idP, $idA){
+        $this->db->query("INSERT INTO openfoodfacts._additifcontenus VALUES('$idA', $idP)");
+    }
 
 }
