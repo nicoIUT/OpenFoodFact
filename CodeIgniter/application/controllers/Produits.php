@@ -24,7 +24,7 @@ class Produits extends CI_Controller {
             $data['product'] = $this->Produit->getProductByID($id);
             if(isset($data['product'])){
                 $this->load->vars($data);
-                $this->load->view('template');
+                $this->load->view('displayTemplate');
             }else{
                 show_404();
             }
@@ -703,7 +703,7 @@ class Produits extends CI_Controller {
         $data['product'] = $this->Produit->getProductByID($id);
 
         $this->load->vars($data);
-        $this->load->view('template');
+        $this->load->view('displayTemplate');
     }
 
     public function formUpdateProduct(){

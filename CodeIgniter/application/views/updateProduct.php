@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+$this->load->helper('form');
+$this->load->helper('url');
 ?>
 
 <h1 class="display-3 mb-5">Modification du produit</h1>
@@ -83,7 +86,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </table>
         </label>
         <h2>Additifs</h2>
-        <p>//TODO mais ca sera pas evident ca demande pas mal de reflexion suivant ce que veut la prof</p>
+        <table id="tableAdditif" class="table table-sm">
+            <tr>
+                <th>Code</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>
+                    <input list="listAdditif" type="text" id="choixAdditif">
+                    <datalist id="listAdditif">
+                        <?php foreach ($additifs as $additif) : ?>
+                            <?php echo "<option value=".$additif['id_additif'].">".$additif['nom']."</option>"; ?>
+                        <?php endforeach; ?>
+                    </datalist>
+                </td>
+                <td>
+                    <button id='btnAjoutAdditif' type='button' class='btn btn-primary'  value="Ajout">+</button>
+                </td>
+            </tr>
+            <?php foreach($product['additif'] as $additif) : ?>
+                <tr id = '<?php echo $additif['id_additif']; ?>'>
+                    <td><?php echo $additif['id_additif']; ?></td>
+                    <td><button type='button' class='btn btn-primary' value='Suppression' onclick=supprimerLigne(<?php echo "'".$additif['id_additif']."'"; ?>)>-</button>
+                        <input type='hidden' name='selectAdditif[]' value='<?php echo $additif['id_additif']; ?>'></td>
+                </tr>
+            <?php endforeach ?>
+
+        </table>
         <h2>Ingredients</h2>
         <p>//TODO ca aussi c'est tendu car y'a de l'affichage recursif a gerer .... mais avec un peu de JS ca doit etre faisable</p>
     </div>
@@ -179,7 +208,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 <div class="row float-right">
-    <button type='submit' class='btn btn-danger btn-lg'  value="Annuler">Annuler</button>
+    <a href="<?php echo base_url()."index.php/Produits/display/".$product['product']['id_produit'];?>"><button type='button' class='btn btn-danger btn-lg'  value="Annuler">Annuler</button></a>
     <button type='submit' class='btn btn-primary btn-lg'  value="Valider">Valider</button>
 </div>
 </form>
+
+
+<script>
+    document.getElementById('btnAjoutAdditif').addEventListener('click', ajouterAdditif);
+
+    function ajouterAdditif(event) {
+        var additifsInput = document.getElementById('choixAdditif');
+        if ((document.getElementById(additifsInput.value))===null) {
+            var additifActuel = additifsInput.value;
+            var additifsTable = document.getElementById('tableAdditif');
+            var tr = document.createElement('tr');
+            tr.id = additifActuel;
+            console.log(additifActuel);
+            tr.innerHTML = '<td>' + additifActuel + '</td>' +
+                '<td>' + '<button ' +
+                '\' type=\'button\' class=\'btn btn-primary\' value=\'Suppression\' ' +
+                'onclick=\'supprimerLigne(\"' + additifActuel + '\")\'>-</button></td>' +
+                '<input type=\'hidden\' name=\'selectAdditif[]\' value=\'' + additifActuel + '\'>';
+            additifsTable.appendChild(tr);
+        }
+    }
+
+    function supprimerLigne(id){
+        document.getElementById(id).remove();
+    }
+/*
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+*/
+</script>
