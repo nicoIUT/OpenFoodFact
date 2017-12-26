@@ -697,8 +697,10 @@ class Produits extends CI_Controller {
         $data['title'] = "Modification : $id";
         $data['content'] = 'updateProduct';
 
+        $data['ingredients'] = $this->Produit->getIngredients($id);
         $data['additifs'] = $this->Produit->getAdditif();
         $data['marques'] = $this->Produit->getMarque();
+        $data['pays'] = $this->Produit->getPays($id);
 
         $data['product'] = $this->Produit->getProductByID($id);
 
@@ -720,6 +722,14 @@ class Produits extends CI_Controller {
         $marque = $this->input->post('marque');
 
         $nutriscore = $this->input->post('nutriscore');
+
+        //Concerne les pays
+        $this->Produit->resetPays($code);
+        $pays = $this->input->post('listPays[]');
+        foreach($pays as $p){
+            $this->Produit->createPays($p);
+            $this->Produit->assocPays($p, $code);
+        }
 
 
         //concerne les nutriments
@@ -790,6 +800,20 @@ class Produits extends CI_Controller {
                   WHERE id_produit = $code";
 
         $this->Produit-> updateProduct($request);
+
+
+        //Concerne les ingredients
+
+        //INGREDIENT_TEXT
+        $ingredientText = $this->input->post('ingredientText');
+        $ingredientText = str_replace("\"", " ", $ingredientText);
+        $ingredientText = str_replace("'", " ", $ingredientText);
+
+        $request ="INSERT INTO openfoodfacts._ingredienttexte VALUES($code, '$ingredientText')";
+
+        $this->Produit->resetIng($code);
+        $this->Produit->UpdateProduct($request);
+
 
         redirect("Produits/display/".$code);
     }

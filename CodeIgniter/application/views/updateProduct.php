@@ -3,7 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $this->load->helper('form');
 $this->load->helper('url');
+
+print_r($pays);
 ?>
+
+
 
 <h1 class="display-3 mb-5">Modification du produit</h1>
 
@@ -11,7 +15,7 @@ $this->load->helper('url');
 <div class="row">
     <div class="col">
         <h2>Caracteristiques</h2>
-        <table>
+        <table id="tableCara">
             <tr>
                 <th>Nom</th>
                 <td><input type="text" name="nom" value="<?php echo $product['product']['product_name'] ?>"></td>
@@ -38,30 +42,40 @@ $this->load->helper('url');
             </tr>
             <tr>
                 <th>Pays</th>
-                <td><input type="text" name="pays"></td>
+                <td><input id='ajoutPays' type="text" name="pays"></td>
+                <td><button id='btnAjoutPays' type='button' class='btn btn-primary'  value="Ajout" onclick=ajouterPays()>+</button></td>
+                <?php foreach($pays as $p) : ?>
+                    <tr id = '<?php echo $p['pays']; ?>'>
+                        <td></td>
+                        <td><?php echo $p['pays']; ?></td>
+                        <td><button type='button' class='btn btn-primary' value='Suppression' onclick=supprimerLigne(<?php echo "'".$p['pays']."'"; ?>)>-</button>
+                            <input type='hidden' name='listPays[]' value='<?php echo $p['pays']; ?>'></td>
+                    </tr>
+                <?php endforeach ?>
             </tr>
         </table>
         <h2>Nutri-score</h2>
         <label>
             <table class="table">
+                <?php $check=false; ?>
                 <tr>
                     <td>
-                        <input type="radio" name="nutriscore" value="a" <?php if($product['product']['nutrition_grade_fr'] == 'a'){echo "checked";}?> >
+                        <input type="radio" name="nutriscore" value="a" <?php if($product['product']['nutrition_grade_fr'] == 'a'){echo "checked";$check=true;}?> >
                     </td>
                     <td>
-                        <input type="radio" name="nutriscore" value="b" <?php if($product['product']['nutrition_grade_fr'] == 'b'){echo "checked";}?>>
+                        <input type="radio" name="nutriscore" value="b" <?php if($product['product']['nutrition_grade_fr'] == 'b'){echo "checked";$check=true;}?>>
                     </td>
                     <td>
-                        <input type="radio" name="nutriscore" value="c" <?php if($product['product']['nutrition_grade_fr'] == 'c'){echo "checked";}?>>
+                        <input type="radio" name="nutriscore" value="c" <?php if($product['product']['nutrition_grade_fr'] == 'c'){echo "checked";$check=true;}?>>
                     </td>
                     <td>
-                        <input type="radio" name="nutriscore" value="d" <?php if($product['product']['nutrition_grade_fr'] == 'd'){echo "checked";}?>>
+                        <input type="radio" name="nutriscore" value="d" <?php if($product['product']['nutrition_grade_fr'] == 'd'){echo "checked";$check=true;}?>>
                     </td>
                     <td>
-                        <input type="radio" name="nutriscore" value="e" <?php if($product['product']['nutrition_grade_fr'] == 'e'){echo "checked";}?>>
+                        <input type="radio" name="nutriscore" value="e" <?php if($product['product']['nutrition_grade_fr'] == 'e'){echo "checked";$check=true;}?>>
                     </td>
                     <td>
-                        <input type="radio" name="nutriscore" value="f">
+                        <input type="radio" name="nutriscore" value="f" <?php if($check == false){echo "checked";}?>>
                     </td>
                 </tr>
                 <tr>
@@ -115,30 +129,11 @@ $this->load->helper('url');
 
         </table>
         <h2>Ingredients</h2>
-        <table class="table table-sm">
-            <tr>
-                <th>Ajouter</th>
-                <th></th>
-                <th><button type="button" class="btn btn-primary">+</button></th>
-            </tr>
-            <tr>
-                <td><input type="text"></td>
-                <td><button type="button" class="btn btn-primary">-</button></td>
-                <td><button type="button" class="btn btn-primary">+</button></td>
-            </tr>
-            <tr>
-                <td>&nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    <input type="text"></td>
-                <td><button type="button" class="btn btn-primary">-</button></td>
-                <td><button type="button" class="btn btn-primary">+</button></td>
-            </tr>
-            <tr>
-                <td>Ceci est un prototype</td>
-            </tr>
-        </table>
+        <button type="button" class="btn btn-primary" onclick=displayIngText()>Texte</button>
+        <button type="button" class="btn btn-primary" onclick=displayIngTree() >Arbre</button>
+        <div id="ingredient">
+            <!--Affichage des deux methodes de gestion des ingredients-->
+        </div>
     </div>
     <div class="col">
         <h2>Nutrition</h2>
@@ -234,6 +229,7 @@ $this->load->helper('url');
 <div class="row float-right">
     <a href="<?php echo base_url()."index.php/Produits/display/".$product['product']['id_produit'];?>"><button type='button' class='btn btn-danger btn-lg'  value="Annuler">Annuler</button></a>
     <button type='submit' class='btn btn-primary btn-lg'  value="Valider">Valider</button>
+    <button>MODALTEST</button>
 </div>
 </form>
 
@@ -248,7 +244,6 @@ $this->load->helper('url');
             var additifsTable = document.getElementById('tableAdditif');
             var tr = document.createElement('tr');
             tr.id = additifActuel;
-            console.log(additifActuel);
             tr.innerHTML = '<td>' + additifActuel + '</td>' +
                 '<td>' + '<button ' +
                 '\' type=\'button\' class=\'btn btn-primary\' value=\'Suppression\' ' +
@@ -258,12 +253,71 @@ $this->load->helper('url');
         }
     }
 
+    function ajouterPays(event){
+        var paysInput = document.getElementById('ajoutPays');
+        console.log(paysInput.value);
+        if((document.getElementById(paysInput.value))===null){
+            var paysActuel = paysInput.value;
+            var paysTable = document.getElementById('tableCara');
+            var tr = document.createElement('tr');
+            tr.id = paysActuel;
+            console.log("42");
+            tr.innerHTML = '<td></td><td>' + paysActuel + '</td>' +
+                    '<td><button type\"button\" class=\"btn btn-primary\" value=\"Suppression\" onclick=\'supprimerLigne(\"'+ paysActuel +'\")\'>-</button></td>' +
+                    '<input type=\"hidden\" name=\"listPays[]\" value=\"'+ paysActuel +'\">';
+            paysTable.appendChild(tr);
+        }
+    }
+
     function supprimerLigne(id){
         document.getElementById(id).remove();
     }
+
+    function displayIngText(){
+        var container = document.getElementById('ingredient');
+        container.innerHTML = "<textarea name=\"ingredientText\" cols=\"50\" rows=\"6\" style=\"background-color:rgba(0,0,0,.05);\"><?php echo $ingredients['ingredient_text']['ingredient_text'] ?></textarea>";
+
+    }
+
+    function displayIngTree(){
+        var container = document.getElementById('ingredient');
+        container.innerHTML ="<table class=\"table table-sm\">\n" +
+            "                <tr>\n" +
+            "                    <th>Ajouter</th>\n" +
+            "                    <th></th>\n" +
+            "                    <th><button type=\"button\" class=\"btn btn-primary\">+</button></th>\n" +
+            "                </tr>\n" +
+            "                <tr>\n" +
+            "                    <td><input type=\"text\"></td>\n" +
+            "                    <td><button type=\"button\" class=\"btn btn-primary\">-</button></td>\n" +
+            "                    <td><button type=\"button\" class=\"btn btn-primary\">+</button></td>\n" +
+            "                </tr>\n" +
+            "                <tr>\n" +
+            "                    <td>&nbsp;\n" +
+            "                        &nbsp;\n" +
+            "                        &nbsp;\n" +
+            "                        &nbsp;\n" +
+            "                        <input type=\"text\"></td>\n" +
+            "                    <td><button type=\"button\" class=\"btn btn-primary\">-</button></td>\n" +
+            "                    <td><button type=\"button\" class=\"btn btn-primary\">+</button></td>\n" +
+            "                </tr>\n" +
+            "                <tr>\n" +
+            "                    <td>Ceci est un prototype</td>\n" +
+            "                </tr>\n" +
+            "            </table>";
+    }
+
+
+
 /*
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
 */
 </script>
+
+<?php if(!empty($ingredients['ingredient_text']['ingredient_text'])) :?>
+    <script>displayIngText();</script>
+<?php else : ?>
+    <script>displayIngTree();</script>
+<?php endif; ?>

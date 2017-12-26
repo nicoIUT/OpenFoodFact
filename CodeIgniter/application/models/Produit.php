@@ -158,4 +158,40 @@ class  Produit  extends  CI_Model
         $this->db->query("INSERT INTO openfoodfacts._additifcontenus VALUES('$idA', $idP)");
     }
 
+    public function resetIng($id){
+        //IngredientText
+        $this->db->query("DELETE FROM openfoodfacts._ingredienttexte WHERE id_produit= $id");
+
+        //IngredientTree
+    }
+
+    public function getIngredients($id){
+        $result = array();
+
+        $result['ingredient_text'] = $this->db->query("SELECT *
+                                    FROM openfoodfacts._ingredientTexte
+                                    WHERE id_produit = $id")->row_array();
+
+
+        return $result;
+    }
+
+    public function getPays($id){
+        return $this->db->query("SELECT pays FROM openfoodfacts._payscommercialiseproduit WHERE id_produit = $id")->result_array();
+    }
+
+    public function resetPays($id){
+        return $this->db->query("DELETE FROM openfoodfacts._payscommercialiseproduit WHERE id_produit = $id");
+    }
+
+    public function createPays($pays){
+        if($this->db->query("SELECT * FROM openfoodfacts._pays WHERE nom = '$pays'")->row()==false) {
+            $this->db->query("INSERT INTO openfoodfacts._pays VALUES('$pays')");
+        }
+    }
+
+    public function assocPays($pays, $code){
+        return $this->db->query("INSERT INTO openfoodfacts._payscommercialiseproduit VALUES($code, '$pays')");
+    }
+
 }
