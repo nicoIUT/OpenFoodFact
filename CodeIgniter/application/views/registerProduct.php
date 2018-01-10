@@ -4,15 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->helper('form');
 $this->load->helper('url');
 ?>
-
-
+<head>
+<link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
+</head>
 
 
 <h1 class="display-3 mb-5">Création de produit </h1>
 <?php echo form_open('Produits2/formRegisterProduct'); ?>
 <div class="row">
 	<div class="col">
-	
+
 		<h2>Caracteristiques</h2>
 		<table class="table table-sm">
 			<tr>
@@ -20,32 +21,27 @@ $this->load->helper('url');
 				<td><td><input type="text" name="nom"></td></td>
 			</tr>
 			<tr>
-				<th>creer une Marque</th>
-				<td><td><input type="text" name="marque" onclick="activer()"></td></td>
-				<?php
-					if(isset($message_erreur)) {
-						echo '<p>'.$message_erreur.'</p>';
-						}
-				?>
-				</tr>
-				<tr>
-				
-			
+				<th>portion</th>
+				<td><td><input type="text" name="portion"></td></td>
+			</tr>
+			<tr>
+
 				<th>selectionner une marque </th>
-				<td><td>
-			<select  disabled="true" size="10" style="width:12.65em ;" name = "listbrands">
-					
-					<?php foreach ($marques as $marque) : ?>
+				<td>
+					<td>
+						<input list="marques">
+						<datalist id = "marques" onchange="toggleMarque( this , 'selectmarque' );" size="10" style="width:12.65em ;" name = "marque" >
+								<?php foreach ($marques as $marque) : ?>
 									<?php echo "<option value=".$marque['nom'].">".$marque['nom']."</option>"; ?>
 								<?php endforeach; ?>
-								
-				</select>
-			</td>	</td>	
-			
-    
+
+						</datalist>
+					</td>
+				</td>
+				
 
 			</tr>
-			
+
 			<tr>
 				<th>Pays</th>
 				<td><td><input type="text" name="pays"></td></td>
@@ -60,7 +56,7 @@ $this->load->helper('url');
                         <input <?php if (isset($nutriscoreA) && $nutriscoreA=="a") echo "checked";?> type="radio" name="nutriscore" value="a">
                     </td>
                     <td>
-					
+
                         <input  <?php if (isset($nutriscoreB) && $nutriscoreB=="b") echo "checked";?>type="radio" name="nutriscore" value="b">
                     </td>
                     <td>
@@ -71,6 +67,9 @@ $this->load->helper('url');
                     </td>
                     <td>
                         <input  <?php if (isset($nutriscoreE) && $nutriscoreE=="e") echo "checked";?>type="radio" name="nutriscore" value="e">
+                    </td>
+										<td>
+                        <input type="radio" name="nutriscore" value="f">
                     </td>
                 </tr>
                 <tr>
@@ -89,19 +88,22 @@ $this->load->helper('url');
                     <td>
                         E
                     </td>
-                    
-                    
-                    
+										<td>
+                        pas de nutriscore......
+                    </td>
+
+
+
                 </tr>
             </table>
         </label>
 
 		<h2>Additifs</h2>
 			<tr>
-				<th>choisir un ou plusieurs adittifs dans la liste</th>
+				<th>choisir un ou plusieurs additifs dans la liste</th>
 			<table id="tableAdditif" class="table table-sm">
             <tr>
-                <th>Code</th>
+                <th>NOM</th>
                 <th></th>
             </tr>
             <tr>
@@ -120,11 +122,12 @@ $this->load->helper('url');
 
         </table>
 			</tr>
-				
+
 			<tr>
-				<th> creer un additif : </th>
+				<th> Créer un additif : </th>
+				<br/>
 				<tr>
-				<td>nom : </td>
+				<td>Nom : </td>
 				<td><input type="text" name="additif_nom"></td>
 			</tr>
             <tr>
@@ -132,104 +135,153 @@ $this->load->helper('url');
 				<td><input type="text" name="Id_additif"></td>
 			</tr>
 			</tr>
-				
+
 		<h2>Ingredients</h2>
-		
-	</div>
-	<div class="col">
-	
-         <table class="table">
-		<h2>Nutrition</h2>
-			<h4>Valeur moyenne pour 100</h4>
 			<tr>
-				<th>Energie</th>
-				<td><td><input type="number" name="energie"></td></td>
-				<th>(en KJ ) </th>
-			</tr>
-           
-				<th>Graisse	</th>
-				<td><td><input type="number" name="graisse"></td></td>
-				<th>(en g) </th>
-			</tr>
-            	
-				<th>Graisse saturée	</th>
-				<td><td><input type="number" name="graisseSaturee"></td></td>
-				<th>(en g) </th>
-			</tr>
-            	
-				<th>Graisse trans</th>
-				<td><td>	<input type="number" name="graisseTrans"></td></td>
-				<th>(en g) </th>
-			</tr>
-            <tr>	
-				<th>Cholesterol	</th>
-				<td><td><input type="number" name="cholesterol"></td></td></br>
-				<th>(en g) </th>
-			</tr>
-            <tr>	
-				<<th>Carbohydrates	</th>
-				<td><td><input type="number" name="carbohydrates"></td></td>
-				<th>(en g) </th>
-			</tr>
-            <tr>	
-				<th>Sucres	</th>
-				<td><td><input type="number" name="sucre"></td></td>
-				<th>(en g) </th>
-			</tr>
-            <tr>	
-				<th>Fibres	</th>
-				<td><td><input type="number" name="fibre"></td></td>
-				<th>(en g) </th>
-			</tr>
-            <tr>	
-				<th>Protéines	</th>
-				<td><td><input type="number" name="proteine"></td></td>
-				<th>(en g) </th>
-			</tr>
-            <tr>	
-				<th>Sel	</th>
-				<td><td><input type="number" name="sel"></td></td>
-				<th>(en g) </th>
-			</tr>
+				<th> Ecrire les ingredients avec comme séparateur une virgule :  </th>
+				<textarea name="ingredient_list" rows="4" cols="50" value ="">  
+				</textarea>
 			
-            <tr>	
-				<th>Sodium	</th>
-				<td><td><input type="number" name="sodium"></td></td>
-				<th>(en g) </th>
 			</tr>
-            <tr>	
-				<th>Vitamine A	</th>
-				<td><td><input type="number" name="vitamineA"></td></td>
-				<th>(en g) </th>
-			</tr>
-            <tr>	
-				<th>Vitamine C	</th>
-				<td><td><input type="number" name="vitamineC"></td></td>
-				<th>(en g) </th>
-			</tr>
-            <tr>	
-				<th>Calcium	</th>
-				<td><td><input type="number" name="calcium"></td></td>
-				<th>(en g) </th>
-			</tr>
-            <tr>	
-				<th>Fer	</th>
-				<td><td><input type="number" name="fer"></td></td>
-				<th>(en g) </th>
-			</tr>   
-		</table>
+
 	</div>
 </div>
+
+  <table class="table">
+			 <h2>Nutrition</h2>
+			<h4>Valeur moyenne pour 100 g </h4>
+			<tr>
+				<th> Energie </th>
+					<td><td><input type="number" name="energie" ></td></td>
+				<th>(en KJ ) </th>
+			</tr>
+			<tr>
+				<th>Graisse	</th>
+					<td><td><input type="number" name="graisse" ></td></td>
+				<th>(en g) </th>
+			</tr>
+			<tr>
+				<th>Graisse saturée	</th>
+					<td><td><input type="number" name="graisseSaturee" ></td></td>
+				<th>(en g) </th>
+			</tr>
+			<tr>
+				<th>Graisse trans</th>
+					<td><td>	<input type="number" name="graisseTrans" ></td></td>
+				<th>(en g) </th>
+			</tr>
+      <tr>
+				<th>Cholesterol	</th>
+					<td><td><input type="number" name="cholesterol" ></td></td>
+				<th>(en g) </th>
+			</tr>
+      <tr>
+				<th>Carbohydrates	</th>
+					<td><td><input type="number" name="carbohydrates" ></td></td>
+				<th>(en g) </th>
+			</tr>
+      <tr>
+				<th>Sucres	</th>
+					<td><td><input type="number" name="sucre" ></td></td>
+				<th>(en g) </th>
+			</tr>
+      <tr>
+				<th>Fibres	</th>
+					<td><td><input type="number" name="fibre" ></td></td>
+				<th>(en g) </th>
+			</tr>
+      <tr>
+				<th>Protéines	</th>
+					<td><td><input type="number" name="proteine" ></td></td>
+				<th>(en g) </th>
+			</tr>
+      <tr>
+				<th>Sel	</th>
+					<td><td><input type="number" name="sel" ></td></td>
+				<th>(en g)</th>
+			</tr>
+      <tr>
+				<th>Sodium</th>
+					<td><td><input type="number" name="sodium" ></td></td>
+				<th>(en g)</th>
+			</tr>
+      <tr>
+				<th>Vitamine A</th>
+					<td><td><input type="number" name="vitamineA" ></td></td>
+				<th>(en g) </th>
+			</tr>
+      <tr>
+				<th>Vitamine C</th>
+					<td><td><input type="number" name="vitamineC" ></td></td>
+				<th>(en g) </th>
+			</tr>
+      <tr>
+				<th>Calcium	</th>
+					<td><td><input type="number" name="calcium" ></td></td>
+				<th>(en g) </th>
+			</tr>
+      <tr>
+				<th>Fer	</th>
+					<td><td><input type="number" name="fer" ></td></td>
+				<th>(en g) </th>
+			</tr>
+			<tr>
+				<th>Score nutritif</th>
+              <td> <td><input type="number" name="scoreNutritif"  ></td><td>
+					</tr>
+
+		</table>
+
+
 
 
 <h2>Informations complementaires</h2>
 	<td> si besoin donner un site source ( lien ) 	</td>
-	<td><input type="number" name="scoreNutritif"></td>
-			
-		</tr></br>
+	<td><input type="text" name="liendemerde"></td>
 
+		</tr>
+</br>
 </table>
-<button type='submit' class='btn btn-primary btn-block'  value="Rechercher">creer le produit </button>
+<div class="row float-right">
+    <button type='submit' class='btn btn-danger btn-lg'  value="Annuler">Annuler</button>
+	</br>
+    <button type='submit' class='btn btn-primary btn-lg'  value="Valider">creer le produit</button>
+</div>
 </form>
 
-</form>
+
+
+</script>
+
+<script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
+		<script src="<?php echo base_url('assets/js/popper.js') ?>"></script>
+		<script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
+
+		<script>
+				document.getElementById('btnAjoutAdditif').addEventListener('click', ajouterAdditif);
+
+				function ajouterAdditif(event){
+						var additifsInput = document.getElementById('choixAdditif');
+						var additifActuel = additifsInput.value;
+						var additifsTable = document.getElementById('tableAdditif');
+						var temps = Date.now();
+						var tr = document.createElement('tr');
+						tr.id = temps;
+						tr.innerHTML = '<td>' + additifActuel + '</td>'+
+										'<td>' + '<button ' +
+										'\' type=\'button\' class=\'btn btn-primary\' value=\'Suppression\' ' +
+										'onclick=\'supprimerLigne('+ temps +')\'>-</button></td>' +
+										'<input type=\'hidden\' name=\'selectAdditif[]\' value=\'' + additifActuel +'\'>';
+						additifsTable.appendChild(tr);
+				}
+
+				function supprimerLigne(id){
+						document.getElementById(id).remove();
+				}
+
+				
+
+				$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+		</script>
