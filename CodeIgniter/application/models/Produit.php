@@ -193,5 +193,9 @@ class  Produit  extends  CI_Model
     public function assocPays($pays, $code){
         return $this->db->query("INSERT INTO openfoodfacts._payscommercialiseproduit VALUES($code, '$pays')");
     }
+    
+    public function getAllPays(){
+		return $this->db->query("SELECT * FROM openfoodfacts._pays")->result_array();
+	}
 
 }

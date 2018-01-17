@@ -702,6 +702,8 @@ class Produits extends CI_Controller {
         $data['marques'] = $this->Produit->getMarque();
         $data['pays'] = $this->Produit->getPays($id);
 
+		$data['allPays'] = $this->Produit->getAllPays();
+
         $data['product'] = $this->Produit->getProductByID($id);
 
         $this->load->vars($data);
@@ -727,7 +729,7 @@ class Produits extends CI_Controller {
         $this->Produit->resetPays($code);
         $pays = $this->input->post('listPays[]');
         foreach($pays as $p){
-            $this->Produit->createPays($p);
+            //$this->Produit->createPays($p);
             $this->Produit->assocPays($p, $code);
         }
 

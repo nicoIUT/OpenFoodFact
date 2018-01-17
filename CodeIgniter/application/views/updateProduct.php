@@ -4,14 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->helper('form');
 $this->load->helper('url');
 
-print_r($pays);
 ?>
 
 
 
 <h1 class="display-3 mb-5">Modification du produit</h1>
 
-<?php echo form_open('Produits/formUpdateProduct'); ?>
+<?php echo form_open('Produits/formUpdateProduct', 'id=myForm'); ?>
 <div class="row">
     <div class="col">
         <h2>Caracteristiques</h2>
@@ -23,7 +22,7 @@ print_r($pays);
             <tr>
                 <th>Code</th>
                 <td><input type="number" name="coded" value="<?php echo $product['product']['id_produit'] ?>"  disabled  ></td>
-                <input type="hidden" name="code" value="<?php echo $product['product']['id_produit'] ?>"
+                <input type="hidden" name="code" value="<?php echo $product['product']['id_produit'] ?>">
             </tr>
             <tr>
                 <th>Marque</th>
@@ -42,7 +41,12 @@ print_r($pays);
             </tr>
             <tr>
                 <th>Pays</th>
-                <td><input id='ajoutPays' type="text" name="pays"></td>
+                <td><input list="listPays" id='ajoutPays' type="text" name="pays"></td>
+                    <datalist id="listPays">
+                    <?php foreach ($allPays as $paysData) : ?>
+						<?php echo "<option id=\"c".$paysData['nom']."\" value=\"".$paysData['nom']."\"></option>"; ?>
+                    <?php endforeach; ?>
+                </datalist>
                 <td><button id='btnAjoutPays' type='button' class='btn btn-primary'  value="Ajout" onclick=ajouterPays()>+</button></td>
                 <?php foreach($pays as $p) : ?>
                     <tr id = '<?php echo $p['pays']; ?>'>
@@ -227,9 +231,8 @@ print_r($pays);
     </div>
 </div>
 <div class="row float-right">
-    <a href="<?php echo base_url()."index.php/Produits/display/".$product['product']['id_produit'];?>"><button type='button' class='btn btn-danger btn-lg'  value="Annuler">Annuler</button></a>
-    <button type='submit' class='btn btn-primary btn-lg'  value="Valider">Valider</button>
-    <button>MODALTEST</button>
+    <button type="button" onclick="confirmCancel()" class='btn btn-danger btn-lg'>Annuler</button>
+    <button type="button" onclick="confirmForm()" class='btn btn-primary btn-lg'>Valider</button>
 </div>
 </form>
 
@@ -256,7 +259,7 @@ print_r($pays);
     function ajouterPays(event){
         var paysInput = document.getElementById('ajoutPays');
         console.log(paysInput.value);
-        if((document.getElementById(paysInput.value))===null){
+        if(((document.getElementById(paysInput.value))===null) && ((document.getElementById('c'+paysInput.value))!== null)){
             var paysActuel = paysInput.value;
             var paysTable = document.getElementById('tableCara');
             var tr = document.createElement('tr');
@@ -306,6 +309,28 @@ print_r($pays);
             "                </tr>\n" +
             "            </table>";
     }
+    
+    function confirmForm(){
+		var answer;
+		answer = confirm("Confirmez vous les modification ?");
+		if(answer === true){
+			var form;
+			form = document.getElementById("myForm");
+			form.submit();
+		}else{
+			
+		}
+	}
+	
+	function confirmCancel(){
+		var answer;
+		answer = confirm("Etes vous sur de vouloir annuler ?");
+		if(answer === true){
+			window.location.replace(<?php echo "'".site_url()."/Produits/display/".$product['product']['id_produit']."'"; ?>);
+		}else{
+			
+		}
+	}
 
 
 
