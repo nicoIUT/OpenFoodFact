@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $this->load->helper('form');
 $this->load->helper('url');
+
+
 ?>
 <head>
 <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
@@ -15,7 +17,7 @@ $this->load->helper('url');
 	<div class="col">
 
 		<h2>Caracteristiques</h2>
-		<table class="table table-sm">
+		<table class="table table-sm" id ="tableCara" >
 			<tr>
 				<th>nom</th>
 				<td><td><input type="text" name="nom"></td></td>
@@ -29,10 +31,10 @@ $this->load->helper('url');
 				<th>selectionner une marque </th>
 				<td>
 					<td>
-						<input list="marques">
-						<datalist id = "marques" onchange="toggleMarque( this , 'selectmarque' );" size="10" style="width:12.65em ;" name = "marque" >
+						<input list="lesmarque" name ="lesmarque" >
+						<datalist id = "lesmarque"  size="10" style="width:12.65em ;"  >
 								<?php foreach ($marques as $marque) : ?>
-									<?php echo "<option value=".$marque['nom'].">".$marque['nom']."</option>"; ?>
+									<?php echo "<option value=\"".$marque['nom']."\">".$marque['nom']."</option>"; ?>
 								<?php endforeach; ?>
 
 						</datalist>
@@ -43,9 +45,31 @@ $this->load->helper('url');
 			</tr>
 
 			<tr>
-				<th>Pays</th>
-				<td><td><input type="text" name="pays"></td></td>
-			</tr>
+                <th>Pays</th>
+                <td>
+					<td>
+                <input list="ajoutPays" name ="ajoutPays" id="ajoutP" >
+						
+						<datalist id = "ajoutPays"  size="10" style="width:12.65em ;"  >
+								<?php foreach ($payslist as $payss) : ?>
+									<?php echo "<option value=\"".$payss['nom']."\">".$pays['nom']."</option>"; ?>
+								<?php endforeach; ?>
+								
+
+						</datalist>
+				<td><button id='btnAjoutPays' type='button' class='btn btn-primary'  value="Ajout" onclick=ajouterPays()>+</button></td>
+				 <?php foreach($pays as $p) : ?>
+						<tr id = '<?php echo $p['nom']; ?>'>
+						<td></td>
+						<td><?php echo $p['nom']; ?></td>
+						<td><button type='button' class='btn btn-primary' value='Suppression' onclick=supprimerLigne(<?php echo "'".$p['nom']."'"; ?>)>-</button>
+						<input type='hidden' name='listPays[]' value='<?php echo $p['nom']; ?>'></td>
+						</tr>
+				<?php endforeach ?>
+						</td>
+               </td>
+            </tr>
+            
 		</table>
 
 		<h2>Nutri-score</h2>
@@ -139,8 +163,7 @@ $this->load->helper('url');
 		<h2>Ingredients</h2>
 			<tr>
 				<th> Ecrire les ingredients avec comme séparateur une virgule :  </th>
-				<textarea name="ingredient_list" rows="4" cols="50" value ="">  
-				</textarea>
+				<textarea name="ingredient_list" rows="4" cols="50" value =""></textarea>
 			
 			</tr>
 
@@ -274,11 +297,32 @@ $this->load->helper('url');
 										'<input type=\'hidden\' name=\'selectAdditif[]\' value=\'' + additifActuel +'\'>';
 						additifsTable.appendChild(tr);
 				}
-
+				function ajouterPays(event){
+					console.log("42");
+					var paysInput = document.getElementById('ajoutP');
+					console.log("coucou");
+					console.log(paysInput.value);
+					if((document.getElementById(paysInput.value))===null){
+							var paysActuel = paysInput.value;
+							var paysTable = document.getElementById('tableCara');
+							var tr = document.createElement('tr');
+							tr.id = paysActuel;
+							console.log(paysActuel);
+							tr.innerHTML = '<td></td><td>' + paysActuel + '</td>' +
+							'<td><button type\"button\" class=\"btn btn-primary\" value=\"Suppression\" onclick=\'supprimerLigne(\"'+ paysActuel +'\")\'>-</button></td>' +
+							'<input type=\"hidden\" name=\"listPays[]\" value=\"'+ paysActuel +'\">';
+							if ( paysActuel!="") {
+							paysTable.appendChild(tr);
+							}
+					}
+				}
 				function supprimerLigne(id){
 						document.getElementById(id).remove();
 				}
 
+				vals = [];
+
+					
 				
 
 				$(function () {

@@ -42,34 +42,6 @@ class Produits2 extends CI_Controller {
         return $result;
     }
 
-    public function listProduct($page = 0, $nbProduct = 25, $search = ""){
-        if(preg_match("#^[0-9]+$#", $page) AND preg_match("#^[0-9]+$#", $nbProduct)) {
-			if(isset($_SESSION['searchRequest'])){
-				$data['title'] = "page : ".($page+1);
-				$data['content'] = 'displayListProducts';
-				$data['product'] = $this->Produit->getSearchList($page, $nbProduct);
-				$data['nbPage'] = $this->nbPage($data['product']['count']['count'], $nbProduct);
-				$data['currentPage'] = $page;
-				$data['currentNbProduct'] = $nbProduct;
-                $data['search'] = $search;
-				$this->load->vars($data);
-				$this->load->view('advancedResearchTemplate');
-			}else{
-				$data['title'] = "page : ".($page+1);
-				$data['content'] = 'displayListProducts';
-				$data['product'] = $this->Produit->getProductList($page, $nbProduct, $search);
-				$data['nbPage'] = $this->nbPage($data['product']['count']['count'], $nbProduct);
-				$data['currentPage'] = $page;
-				$data['currentNbProduct'] = $nbProduct;
-				$data['search'] = $search;
-				$this->load->vars($data);
-				$this->load->view('template');
-			}
-        }else{
-            show_404();
-        }
-    }
-
 
 
 
@@ -90,7 +62,8 @@ class Produits2 extends CI_Controller {
 
         $data['additifs'] = $this->Produit->getAdditif();
         $data['marques'] = $this->Produit->getMarque();
-
+        $data['payslist']=$this->Produit_model->getpays();
+        $data['pays']=[]; 
         $this->load->vars($data);
         $this->load->view('template');
     }
@@ -104,7 +77,7 @@ class Produits2 extends CI_Controller {
 
         $nom = $this->input->post('nom');
         $portion = $this->input->post('portion');
-        $marque = $this->input->post('marque');
+        $lesmarque = $this->input->post('lesmarque');
         $marquedelist = $this->input->post('listbrands');
         $energie = $this->input->post('energie') ;
         $graisse= $this->input->post('graisse');
@@ -121,9 +94,10 @@ class Produits2 extends CI_Controller {
         $vitamineC= $this->input->post('vitamineC');
         $calcium= $this->input->post('calcium');
         $fer= $this->input->post('fer');
+        $pays = $this->input->post('listPays') ; 
         
         $ingredient_list = $this->input->post('ingredient_list');
-        echo $ingredient_list ; 
+      
 
         //Ce qui concerne le nutriscore
         $nutriscore = $this->input->post('nutriscore');
@@ -178,38 +152,44 @@ class Produits2 extends CI_Controller {
 	   }
 
 
-        if((!empty($nom)) OR (!empty($portion)) OR (!empty($marque))){
+        if((!empty($nom)) OR (!empty($portion)) OR (!empty($lesmarque))){
 
 			if (  $this->Produit_model->getVerifByName ( $nom ) == true ) {
-				//	echo $nom." \n ";
+					echo $nom." \n ";
+			
+			
 
-          if ( $this->Produit_model->getVerifByBrands($marque )  == true ) {
-          //    echo $marque." marque pas dans la liste  \n " ;
+          if ( $this->Produit_model->getVerifByBrands($lesmarque )  == true ) {
+              echo " marque pas dans la liste  \n " ;
+		  }
+		   else {
+    			echo " marque deja dans la liste " ;
+    		}
+    		
 
-              if (  !empty( $nutriscore) ) {
-              //  echo ($nutriscore) ;
-              }
-              else {
-            //    echo " pas de nutriscore " ;
-                $nutriscore = "";
-              }
+          if (  !empty( $nutriscore) ) {
+              echo ($nutriscore) ;
+          }
+          else {
+              echo " pas de nutriscore " ;
+              $nutriscore = "";
+          }
 
-            }
-            else {
-    			//		echo " marque deja dans la liste " ;
-    				}
+         if (  !empty( $scorenutri) ) {
+              echo ($scorenutri) ;
+          }
+          else {
+              echo " pas de scorenutri " ;
+              $scorenutri = 0;
+          }
+         
 
-				}
-				else {
-				//	echo " produit deja dans la base " ;
-					}
+			
+			
 		
-        if ( empty($marque)  ) {
-			echo $marque ; 
-		
-            $marque = $marquedelist ;
-        }
-        
+       
+       
+       
         $date = date('Y-m-d H:i:s', time());
 
 
@@ -218,21 +198,27 @@ class Produits2 extends CI_Controller {
         $request =  $request. " trans_fat_100g , cholesterol_100g , carbohydrates_100g, sugars_100g, fibers_100g, proteins_100g, salt_100g, sodium_100g,";
         $request =  $request. " vitamin_a_100g, vitamin_c_100g, calcium_100g, iron_100g, nutrition_score_fr_100g ) values " ;
 
-        $request=$request. "( '$date', '$date', '$nom', '$marque', '$portion', '$nutriscore', $energie,  $graisse, $graisseSaturee, $graisseTrans, $cholesterol,";
+        $request=$request. "( '$date', '$date', '$nom', '$lesmarque', '$portion', '$nutriscore', $energie,  $graisse, $graisseSaturee, $graisseTrans, $cholesterol,";
         $request=$request. " $carbohydrates, $sucre, $fibre, $proteine, $sel, $sodium, $vitamineA, $vitamineC, $calcium, $fer,   $scorenutri );";
         echo $request ;
-        print_r ( $this->Produit_model->recup_table('openfoodfacts._produit') ) ;
-
+       
 	  // ici on execute la creation =) 
-       $this->Produit_model->execute_creation( $request , $nom,$marque) ;
+	  
+		
+	   // print_r ( $this->Produit_model->recup_table('openfoodfacts._produit') ) ;
+
+       $this->Produit_model->execute_creation( $request , $nom,$lesmarque , $pays, $ingredient_list ) ;
 
 			}
+			
+		else {
+				echo " produit deja dans la base " ;
+			}
+		}
       else {
         echo " creation impossible " ;
 
       }
-
-
 
 }
 	public function reset(){
